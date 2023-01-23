@@ -76,7 +76,7 @@ public class DatabaseManagerSingletonTest
     @Test
     public void selectAllOk()
     {
-    	//assertTrue(DatabaseManagerSingleton.getInstance().selectAll().size() == 2 );
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectAllUsers().size() == 0 );
     }
     
     @Test

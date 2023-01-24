@@ -13,6 +13,7 @@
 		<property name="connection.password">acfs07_dev</property>
 		<property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
 		<mapping resource="user.hbm.xml" />
+		<mapping resource="role.hbm.xml" />		
 	</session-factory>
 
 </hibernate-configuration>

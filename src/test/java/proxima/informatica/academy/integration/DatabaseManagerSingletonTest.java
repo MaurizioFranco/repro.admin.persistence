@@ -31,13 +31,13 @@ public class DatabaseManagerSingletonTest
     @Test
     public void testGetUserOk() throws ClassNotFoundException, IOException, SQLException
     {
-    	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("1@2.3","abc") != null);
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectByEmail("1@2.3","abc") != null);
     }
     
     @Test
     public void testGetUserKo() throws ClassNotFoundException, IOException, SQLException
     {
-    	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("a@ciao","aaa") == null);
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectByEmail("a@ciao","aaa") == null);
     }
     
     /**

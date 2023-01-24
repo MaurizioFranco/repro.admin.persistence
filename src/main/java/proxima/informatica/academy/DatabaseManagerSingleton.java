@@ -52,19 +52,18 @@ public class DatabaseManagerSingleton {
 			rowsUpdate = pStatement.executeUpdate();
 			con.close();
 		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return rowsUpdate;
 	}
-	
+
 	public int insertRole(RoleDto messageToInsert) {
 		RoleDto user = new RoleDto();
 		int rowsUpdate = 0;
 		try {
 			Connection con = getConnection();
-			String query = "insert into roles(label,description,level)"
-					+ " values(?,?,?);";
+			String query = "insert into roles(label,description,level)" + " values(?,?,?);";
 			PreparedStatement pStatement = con.prepareStatement(query);
 			pStatement.setString(1, messageToInsert.getLabel());
 			pStatement.setString(2, messageToInsert.getDescription());
@@ -72,38 +71,38 @@ public class DatabaseManagerSingleton {
 			rowsUpdate = pStatement.executeUpdate();
 			con.close();
 		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return rowsUpdate;
 	}
 
 	public int deleteAllUsers() {
-		int row= 0;
+		int row = 0;
 		try {
-		Connection con = getConnection();
-		String query = "DELETE FROM users";
-		PreparedStatement pStatement = con.prepareStatement(query);
-		row = pStatement.executeUpdate();
-		con.close();
-		}catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			Connection con = getConnection();
+			String query = "DELETE FROM users";
+			PreparedStatement pStatement = con.prepareStatement(query);
+			row = pStatement.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return row;
 	}
-	
+
 	public int deleteAllRoles() {
-		int row= 0;
+		int row = 0;
 		try {
-		Connection con = getConnection();
-		String query = "DELETE FROM roles";
-		PreparedStatement pStatement = con.prepareStatement(query);
-		row = pStatement.executeUpdate();
-		con.close();
-		}catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			Connection con = getConnection();
+			String query = "DELETE FROM roles";
+			PreparedStatement pStatement = con.prepareStatement(query);
+			row = pStatement.executeUpdate();
+			con.close();
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return row;
 	}
@@ -111,73 +110,73 @@ public class DatabaseManagerSingleton {
 	public ArrayList<UserDto> selectAllUsers() {
 		ArrayList<UserDto> users = new ArrayList<UserDto>();
 		try {
-		Connection con = getConnection();
-		String query = "SELECT * FROM users";
-		PreparedStatement pStatement = con.prepareStatement(query);
-		ResultSet res = pStatement.executeQuery();
+			Connection con = getConnection();
+			String query = "SELECT * FROM users";
+			PreparedStatement pStatement = con.prepareStatement(query);
+			ResultSet res = pStatement.executeQuery();
 
-		while (res.next()) {
-			UserDto getUser = new UserDto();
-			getUser.setId(res.getInt("id"));
-			getUser.setEmail(res.getString("email"));
-			getUser.setPassword(res.getString("password"));
-			getUser.setFirstName(res.getString("firstname"));
-			getUser.setLastName(res.getString("lastname"));
-			getUser.setDateOfBirth(res.getDate("dateofbirth"));
-			getUser.setRegDate(res.getTimestamp("regdate"));
-			getUser.setRole(res.getInt("role"));
-			getUser.setImgPath(res.getString("imgpath"));
-			getUser.setNote(res.getString("note"));
-			getUser.setEnabled(res.getBoolean("enabled"));
-			users.add(getUser);
-		}
-		}catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			while (res.next()) {
+				UserDto getUser = new UserDto();
+				getUser.setId(res.getInt("id"));
+				getUser.setEmail(res.getString("email"));
+				getUser.setPassword(res.getString("password"));
+				getUser.setFirstName(res.getString("firstname"));
+				getUser.setLastName(res.getString("lastname"));
+				getUser.setDateOfBirth(res.getDate("dateofbirth"));
+				getUser.setRegDate(res.getTimestamp("regdate"));
+				getUser.setRole(res.getInt("role"));
+				getUser.setImgPath(res.getString("imgpath"));
+				getUser.setNote(res.getString("note"));
+				getUser.setEnabled(res.getBoolean("enabled"));
+				users.add(getUser);
+			}
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return users;
 	}
-	
+
 	public ArrayList<UserDto> selectAllAdminByRole(int role) {
 		ArrayList<UserDto> users = new ArrayList<UserDto>();
 		try {
-		Connection con = getConnection();
-		String query = "SELECT email from users WHERE role=?";
-		PreparedStatement pStatement = con.prepareStatement(query);
-		pStatement.setInt(1, role);
-		ResultSet res = pStatement.executeQuery();
+			Connection con = getConnection();
+			String query = "SELECT email from users WHERE role=?";
+			PreparedStatement pStatement = con.prepareStatement(query);
+			pStatement.setInt(1, role);
+			ResultSet res = pStatement.executeQuery();
 
-		while (res.next()) {
-			UserDto getUser = new UserDto();
-			getUser.setEmail(res.getString("email"));
-			users.add(getUser);
-		}
-		}catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			while (res.next()) {
+				UserDto getUser = new UserDto();
+				getUser.setEmail(res.getString("email"));
+				users.add(getUser);
+			}
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return users;
 	}
-	
+
 	public ArrayList<RoleDto> selectAllRoles() {
 		ArrayList<RoleDto> roles = new ArrayList<RoleDto>();
 		try {
-		Connection con = getConnection();
-		String query = "SELECT * FROM roles";
-		PreparedStatement pStatement = con.prepareStatement(query);
-		ResultSet res = pStatement.executeQuery();
+			Connection con = getConnection();
+			String query = "SELECT * FROM roles";
+			PreparedStatement pStatement = con.prepareStatement(query);
+			ResultSet res = pStatement.executeQuery();
 
-		while (res.next()) {
-			RoleDto getRole = new RoleDto();
-			getRole.setId(res.getInt("id"));
-			getRole.setLabel(res.getString("label"));
-			getRole.setDescription(res.getString("description"));
-			getRole.setLevel(res.getInt("level"));
-			roles.add(getRole);
-		}
-		}catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			while (res.next()) {
+				RoleDto getRole = new RoleDto();
+				getRole.setId(res.getInt("id"));
+				getRole.setLabel(res.getString("label"));
+				getRole.setDescription(res.getString("description"));
+				getRole.setLevel(res.getInt("level"));
+				roles.add(getRole);
+			}
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return roles;
 	}
@@ -209,13 +208,13 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return userToReturn;
 	}
 
-	public UserDto selectByUserId(int id){
+	public UserDto selectByUserId(int id) {
 		UserDto userToReturn = null;
 		try {
 			Connection con = getConnection();
@@ -240,12 +239,12 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return userToReturn;
 	}
-	
+
 //	public UserDto selectByUserLastId(int id){
 //		UserDto userToReturn = null;
 //		try {
@@ -274,8 +273,8 @@ public class DatabaseManagerSingleton {
 //		}
 //		return userToReturn;
 //	}
-	
-	public RoleDto selectByRoleId(int id){
+
+	public RoleDto selectByRoleId(int id) {
 		RoleDto roleToReturn = null;
 		try {
 			Connection con = getConnection();
@@ -293,13 +292,13 @@ public class DatabaseManagerSingleton {
 				return roleToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return roleToReturn;
 	}
 
-	public UserDto selectByEmail(String email){
+	public UserDto selectByEmail(String email) {
 		UserDto userToReturn = null;
 		try {
 			Connection con = getConnection();
@@ -324,12 +323,12 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return userToReturn;
 	}
-	
+
 	public UserDto getUser(String emailLog, String passwordLog) {
 		UserDto userToReturn = new UserDto();
 		try {
@@ -356,27 +355,32 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
-			logger.error(e.getMessage(),e);
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return userToReturn;
 	}
-	
-	public boolean deleteRowUsers(int id) throws ClassNotFoundException, SQLException, IOException {
-		boolean value = false;
-		Connection con = getConnection();
-		String query = "DELETE FROM users where id=?";
-		PreparedStatement pStatement = con.prepareStatement(query);
-		pStatement.setInt(1, id);
-		int row = pStatement.executeUpdate();
-		if (row > 0) {
-			value = true;
-		}
 
-		con.close();
+	public boolean deleteRowUsers(int id) {
+		boolean value = false;
+		Connection con;
+		try {
+			con = getConnection();
+
+			String query = "DELETE FROM users where id=?";
+			PreparedStatement pStatement = con.prepareStatement(query);
+			pStatement.setInt(1, id);
+			int row = pStatement.executeUpdate();
+			if (row > 0) {
+				value = true;
+			}
+			con.close();
+		} catch (ClassNotFoundException | IOException | SQLException e) {
+			logger.error(e.getMessage(), e);
+		}
 		return value;
 	}
-	
+
 	public boolean deleteRowRoles(int id) throws ClassNotFoundException, SQLException, IOException {
 		boolean value = false;
 		Connection con = getConnection();
@@ -391,14 +395,13 @@ public class DatabaseManagerSingleton {
 		con.close();
 		return value;
 	}
-	
-	public int updateUser(int id,UserDto itemToInsert) {
+
+	public int updateUser(int id, UserDto itemToInsert) {
 		int returnValue = 0;
 		try {
 			Connection con = getConnection();
 			String query = "UPDATE users SET email =? , password=? , firstname=? , lastname=?, "
-					+ "dateOfBirth=?, regDate=? , role=?, "
-					+ "imgPath=? , note=? ,enabled=? WHERE id =?";
+					+ "dateOfBirth=?, regDate=? , role=?, " + "imgPath=? , note=? ,enabled=? WHERE id =?";
 			PreparedStatement pStatement = con.prepareStatement(query);
 			pStatement.setString(1, itemToInsert.getEmail());
 			pStatement.setString(2, itemToInsert.getPassword());
@@ -413,15 +416,15 @@ public class DatabaseManagerSingleton {
 			pStatement.setInt(11, id);
 			returnValue = pStatement.executeUpdate();
 			con.close();
-			return returnValue;		
-			} catch (Exception e) {
-				//e.printStackTrace();
-				logger.error(e.getMessage(),e);
-			}
+			return returnValue;
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
+		}
 		return returnValue;
 	}
-	
-	public int updateRole(int id,RoleDto itemToInsert) {
+
+	public int updateRole(int id, RoleDto itemToInsert) {
 		int returnValue = 0;
 		try {
 			Connection con = getConnection();
@@ -433,11 +436,11 @@ public class DatabaseManagerSingleton {
 			pStatement.setInt(4, id);
 			returnValue = pStatement.executeUpdate();
 			con.close();
-			return returnValue;		
-			} catch (Exception e) {
-				//e.printStackTrace();
-				logger.error(e.getMessage(),e);
-			}
+			return returnValue;
+		} catch (Exception e) {
+			// e.printStackTrace();
+			logger.error(e.getMessage(), e);
+		}
 		return returnValue;
 	}
 

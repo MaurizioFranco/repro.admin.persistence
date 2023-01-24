@@ -2,13 +2,10 @@ package proxima.informatica.academy;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -25,9 +22,7 @@ public class DatabaseManagerSingleton {
 	private static DatabaseManagerSingleton instance;
 	private final static Logger logger = LoggerFactory.getLogger(DatabaseManagerSingleton.class);
 
-	private DatabaseManagerSingleton() {
-		// logger.debug("Instanziato Costruttore Privato Database Manager Singleton");
-	}
+	private DatabaseManagerSingleton() {}
 
 	public static DatabaseManagerSingleton getInstance() {
 		if (instance == null) {
@@ -52,14 +47,12 @@ public class DatabaseManagerSingleton {
 			rowsUpdate = pStatement.executeUpdate();
 			con.close();
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return rowsUpdate;
 	}
 	
 	public int insertRole(RoleDto messageToInsert) {
-		RoleDto user = new RoleDto();
 		int rowsUpdate = 0;
 		try {
 			Connection con = getConnection();
@@ -72,7 +65,6 @@ public class DatabaseManagerSingleton {
 			rowsUpdate = pStatement.executeUpdate();
 			con.close();
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return rowsUpdate;
@@ -87,7 +79,6 @@ public class DatabaseManagerSingleton {
 		row = pStatement.executeUpdate();
 		con.close();
 		}catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return row;
@@ -102,7 +93,6 @@ public class DatabaseManagerSingleton {
 		row = pStatement.executeUpdate();
 		con.close();
 		}catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return row;
@@ -132,7 +122,6 @@ public class DatabaseManagerSingleton {
 			users.add(getUser);
 		}
 		}catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return users;
@@ -153,7 +142,6 @@ public class DatabaseManagerSingleton {
 			users.add(getUser);
 		}
 		}catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return users;
@@ -176,13 +164,12 @@ public class DatabaseManagerSingleton {
 			roles.add(getRole);
 		}
 		}catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return roles;
 	}
 
-	public UserDto selectByIdEmail(String emailLog, String passwordLog)
+	public UserDto selectByEmail(String emailLog, String passwordLog)
 			throws IOException, ClassNotFoundException, SQLException {
 		UserDto userToReturn = null;
 		try {
@@ -209,7 +196,6 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return userToReturn;
@@ -240,40 +226,10 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return userToReturn;
 	}
-	
-//	public UserDto selectByUserLastId(int id){
-//		UserDto userToReturn = null;
-//		try {
-//			Connection con = getConnection();
-//			String query = "SELECT id from users where id =1;";
-//			PreparedStatement pStatement = con.prepareStatement(query);
-//			ResultSet res = pStatement.executeQuery();
-//			if (res.next() == true) {
-//				userToReturn = new UserDto();
-//				userToReturn.setId(res.getInt("id"));
-//				userToReturn.setEmail(res.getString("email"));
-//				userToReturn.setPassword(res.getString("password"));
-//				userToReturn.setFirstName(res.getString("firstname"));
-//				userToReturn.setLastName(res.getString("lastname"));
-//				userToReturn.setDateOfBirth(res.getDate("dateofbirth"));
-//				userToReturn.setRegDate(res.getTimestamp("regdate"));
-//				userToReturn.setRole(res.getInt("role"));
-//				userToReturn.setImgPath(res.getString("imgpath"));
-//				userToReturn.setNote(res.getString("note"));
-//				userToReturn.setEnabled(res.getBoolean("enabled"));
-//				con.close();
-//				return userToReturn;
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return userToReturn;
-//	}
 	
 	public RoleDto selectByRoleId(int id){
 		RoleDto roleToReturn = null;
@@ -293,7 +249,6 @@ public class DatabaseManagerSingleton {
 				return roleToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return roleToReturn;
@@ -324,7 +279,6 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return userToReturn;
@@ -356,7 +310,6 @@ public class DatabaseManagerSingleton {
 				return userToReturn;
 			}
 		} catch (Exception e) {
-			//e.printStackTrace();
 			logger.error(e.getMessage(),e);
 		}
 		return userToReturn;
@@ -415,7 +368,6 @@ public class DatabaseManagerSingleton {
 			con.close();
 			return returnValue;		
 			} catch (Exception e) {
-				//e.printStackTrace();
 				logger.error(e.getMessage(),e);
 			}
 		return returnValue;
@@ -435,7 +387,6 @@ public class DatabaseManagerSingleton {
 			con.close();
 			return returnValue;		
 			} catch (Exception e) {
-				//e.printStackTrace();
 				logger.error(e.getMessage(),e);
 			}
 		return returnValue;

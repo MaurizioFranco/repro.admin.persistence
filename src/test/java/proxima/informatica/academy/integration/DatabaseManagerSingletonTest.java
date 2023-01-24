@@ -7,21 +7,18 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-import javax.xml.crypto.Data;
 
 import org.junit.Test;
 
 import proxima.informatica.academy.DatabaseManagerSingleton;
-import proxima.informatica.academy.dto.RoleDto;
 import proxima.informatica.academy.dto.UserDto;
 
 /**
  * @author Giammarco Lucchetti
+ * @author Giacomo 
+ * @author maurizio.franco@ymail.com
  */
 public class DatabaseManagerSingletonTest 
 { 
@@ -42,28 +39,42 @@ public class DatabaseManagerSingletonTest
     {
     	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("a@ciao","aaa") == null);
     }
-//    
-//    @Test
-//    public void insertOk() throws ClassNotFoundException, SQLException, IOException
-//    {
-//    	UserDto user = new UserDto();
-//    	user.setEmail("giammarco.lucchetti@hotmail.it");
-//    	user.setPassword("ciao");;
-//    	user.setFirstName("Giammarco");
-//    	user.setLastName("Lucchetti");
-//    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
-//    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
-//    	user.setRole(10);
-//        assertTrue(DatabaseManagerSingleton.getInstance().insert(user)>0);
-//    }
-//    
+    
+    /**
+     * Test the user insert
+     * @author Giammarco Lucchetti
+     */
     @Test
-    public void insertKo()
+    public void insertOk() throws ClassNotFoundException, SQLException, IOException
     {
-    	//UserDto user = new UserDto();
-    	//assertTrue(DatabaseManagerSingleton.getInstance().insert(user) == 0);
+    	DatabaseManagerSingleton.getInstance().deleteAllUsers();
+    	UserDto user = new UserDto();
+    	user.setEmail("giammarco.lucchetti@hotmail.it");
+    	user.setPassword("ciao");
+    	user.setFirstName("Giammarco");
+    	user.setLastName("Lucchetti");
+    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+    	user.setRole(10);
+        assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user)>0);
+        assertTrue(DatabaseManagerSingleton.getInstance().selectAllUsers().size()>0);
     }
     
+    /**
+     * Test the user insert
+     * @author Giammarco Lucchetti
+     */
+    @Test
+    public void insertKoByEmailDuplicate()
+    {
+    	String email = "giammarco.lucchetti@hotmail.it";
+    	DatabaseManagerSingleton.getInstance().deleteAllUsers();
+    	UserDto user = getUserByTest();
+    	assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user)>0);
+    	UserDto user2 = new UserDto();
+    	user2.setEmail(email);
+    	assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user2) == 0);
+    }
     
     /**
      * @author Giacomo Della Luna
@@ -156,49 +167,17 @@ public class DatabaseManagerSingletonTest
     public void selectByEmailKo()
     {
     	//assertFalse(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco.lucchetti@hotmail.it") == null);
-    } 
+    }
     
-//    @Test
-//    public void updateOk()
-//    {
-//    	UserDto user = new UserDto();
-//    	user.setEmail("giammarco21@hotmail.it");
-//    	user.setPassword("eccolo22");
-//    	user.setFirstName("Giammarcomodificato22");
-//    	user.setLastName("Lucchettimodificato22");
-//    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
-//    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
-//    	user.setRole(10);
-//    	user.setImgPath("imgpath");
-//    	user.setNote("note");
-//    	user.setEnabled(false);
-//    	DatabaseManagerSingleton.getInstance().updateUser(7,user);
-//    	assertTrue(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco21@hotmail.it") != null);
-//    }
-//    
-//    @Test
-//    public void updateKo()
-//    {
-//    	UserDto user = new UserDto();
-//    	user.setEmail("giammarco21@hotmail.it");
-//    	user.setPassword("eccolo22");
-//    	user.setFirstName("Giammarcomodificato22");
-//    	user.setLastName("Lucchettimodificato22");
-//    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
-//    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
-//    	user.setRole(1);
-//    	user.setImgPath("imgpath");
-//    	user.setNote("note");
-//    	user.setEnabled(false);
-//    	assertFalse(DatabaseManagerSingleton.getInstance().update(7,user)>0 );
-//    }
-//    
-//    @Test
-//    public void insertRole() {
-//    	RoleDto role = new RoleDto();
-//    	role.setLabel("label1");
-//    	role.setDescription("description1");
-//    	role.setLevel(1);
-//        assertTrue(DatabaseManagerSingleton.getInstance().insertRole(role)>0);
-//    }
+    public UserDto getUserByTest(){
+    	UserDto user = new UserDto();
+    	user.setEmail("giammarco.lucchetti@hotmail.it");
+    	user.setPassword("ciao");
+    	user.setFirstName("Giammarco");
+    	user.setLastName("Lucchetti");
+    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+    	user.setRole(10);
+    	return user;
+    }
 }

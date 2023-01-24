@@ -1,11 +1,11 @@
-drop table if exists surveyquestions; 
-drop table if exists surveyreplies; 
+drop table if exists surveyquestions; --giacomo
+drop table if exists surveyreplies; --giammarco
 drop table if exists usersurveytoken; 
-drop table if exists surveys; --
-drop table if exists questions; --
+drop table if exists surveys; --matteo
+drop table if exists questions; -- dayem
 
-drop table if exists candidates; ---
-drop table if exists candidate_states; ---
+drop table if exists candidates; --- antonio
+drop table if exists candidate_states; --- marco
 drop table if exists coursepage; --
 
 drop table if exists users; --

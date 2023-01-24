@@ -10,6 +10,9 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+import javax.xml.crypto.Data;
 
 import org.junit.Test;
 
@@ -28,21 +31,21 @@ public class DatabaseManagerSingletonTest
 //        assertTrue(DatabaseManagerSingleton.getInstance().selectAll().size() == 2 );
 //    
 //    }
-//    @Test
-//    public void testGetUserOk() throws ClassNotFoundException, IOException, SQLException
-//    {
-//    	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("1@2.3","abc") != null);
-//    }
-//    
-//    @Test
-//    public void testGetUserKo() throws ClassNotFoundException, IOException, SQLException
-//    {
-//    	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("a@ciao","aaa") == null);
-//    }
+    @Test
+    public void testGetUserOk() throws ClassNotFoundException, IOException, SQLException
+    {
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("1@2.3","abc") != null);
+    }
     
     @Test
-    public void insertOk() throws ClassNotFoundException, SQLException, IOException
+    public void testGetUserKo() throws ClassNotFoundException, IOException, SQLException
     {
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("a@ciao","aaa") == null);
+    }
+//    
+//    @Test
+//    public void insertOk() throws ClassNotFoundException, SQLException, IOException
+//    {
 //    	UserDto user = new UserDto();
 //    	user.setEmail("giammarco.lucchetti@hotmail.it");
 //    	user.setPassword("ciao");;
@@ -52,8 +55,8 @@ public class DatabaseManagerSingletonTest
 //    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
 //    	user.setRole(10);
 //        assertTrue(DatabaseManagerSingleton.getInstance().insert(user)>0);
-    }
-    
+//    }
+//    
     @Test
     public void insertKo()
     {
@@ -61,10 +64,56 @@ public class DatabaseManagerSingletonTest
     	//assertTrue(DatabaseManagerSingleton.getInstance().insert(user) == 0);
     }
     
+    
+    /**
+     * @author Giacomo Della Luna
+     * 
+     * test deleteAll 
+     * check that the database is empty, insert a new user and then delete all
+     */
     @Test
     public void deleteAllOk()
     {
-    	//assertTrue(DatabaseManagerSingleton.getInstance().deleteAll() > 0 );
+    	DatabaseManagerSingleton.getInstance().deleteAllUsers();
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectAllUsers().isEmpty());
+    	UserDto user = new UserDto();
+    	user.setEmail("prova@prova.p");
+    	user.setPassword("p");;
+    	user.setFirstName("P");
+    	user.setLastName("P");
+    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+    	user.setRole(10);
+    	assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user) > 0);
+    	assertTrue(DatabaseManagerSingleton.getInstance().deleteAllUsers() > 0 );
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectAllUsers().isEmpty());
+
+    }
+    
+    /**
+     * @author Giacomo Della Luna
+     * 
+     * test deleteAll 
+     * check that the database is empty, insert a new user then retrive the user id with a select
+     * and delete the user
+     * 
+     */
+    @Test
+    public void deleteRowUsersOk() {
+    	DatabaseManagerSingleton.getInstance().deleteAllUsers();
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectAllUsers().isEmpty());
+    	UserDto user = new UserDto();
+    	user.setEmail("prova@prova.p");
+    	user.setPassword("p");;
+    	user.setFirstName("P");
+    	user.setLastName("P");
+    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+    	user.setRole(10);
+    	assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user) > 0);
+    	int id = DatabaseManagerSingleton.getInstance().selectByEmail(user.getEmail()).getId();
+    	assertTrue(DatabaseManagerSingleton.getInstance().deleteRowUsers(id));
+    	assertTrue(DatabaseManagerSingleton.getInstance().selectByUserId(id) == null);    	
     }
     
     @Test
@@ -109,24 +158,24 @@ public class DatabaseManagerSingletonTest
     	//assertFalse(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco.lucchetti@hotmail.it") == null);
     } 
     
-    @Test
-    public void updateOk()
-    {
-    	UserDto user = new UserDto();
-    	user.setEmail("giammarco21@hotmail.it");
-    	user.setPassword("eccolo22");
-    	user.setFirstName("Giammarcomodificato22");
-    	user.setLastName("Lucchettimodificato22");
-    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
-    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
-    	user.setRole(10);
-    	user.setImgPath("imgpath");
-    	user.setNote("note");
-    	user.setEnabled(false);
-    	DatabaseManagerSingleton.getInstance().updateUser(7,user);
-    	assertTrue(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco21@hotmail.it") != null);
-    }
-    
+//    @Test
+//    public void updateOk()
+//    {
+//    	UserDto user = new UserDto();
+//    	user.setEmail("giammarco21@hotmail.it");
+//    	user.setPassword("eccolo22");
+//    	user.setFirstName("Giammarcomodificato22");
+//    	user.setLastName("Lucchettimodificato22");
+//    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+//    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+//    	user.setRole(10);
+//    	user.setImgPath("imgpath");
+//    	user.setNote("note");
+//    	user.setEnabled(false);
+//    	DatabaseManagerSingleton.getInstance().updateUser(7,user);
+//    	assertTrue(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco21@hotmail.it") != null);
+//    }
+//    
 //    @Test
 //    public void updateKo()
 //    {
@@ -143,7 +192,7 @@ public class DatabaseManagerSingletonTest
 //    	user.setEnabled(false);
 //    	assertFalse(DatabaseManagerSingleton.getInstance().update(7,user)>0 );
 //    }
-    
+//    
 //    @Test
 //    public void insertRole() {
 //    	RoleDto role = new RoleDto();

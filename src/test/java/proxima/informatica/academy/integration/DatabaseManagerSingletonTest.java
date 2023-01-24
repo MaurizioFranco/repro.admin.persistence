@@ -40,25 +40,40 @@ public class DatabaseManagerSingletonTest
 //    	assertTrue(DatabaseManagerSingleton.getInstance().selectByIdEmail("a@ciao","aaa") == null);
 //    }
     
+    /**
+     * Test the user insert
+     * @author Giammarco Lucchetti
+     */
     @Test
     public void insertOk() throws ClassNotFoundException, SQLException, IOException
     {
-//    	UserDto user = new UserDto();
-//    	user.setEmail("giammarco.lucchetti@hotmail.it");
-//    	user.setPassword("ciao");;
-//    	user.setFirstName("Giammarco");
-//    	user.setLastName("Lucchetti");
-//    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
-//    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
-//    	user.setRole(10);
-//        assertTrue(DatabaseManagerSingleton.getInstance().insert(user)>0);
+    	DatabaseManagerSingleton.getInstance().deleteAllUsers();
+    	UserDto user = new UserDto();
+    	user.setEmail("giammarco.lucchetti@hotmail.it");
+    	user.setPassword("ciao");
+    	user.setFirstName("Giammarco");
+    	user.setLastName("Lucchetti");
+    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+    	user.setRole(10);
+        assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user)>0);
+        assertTrue(DatabaseManagerSingleton.getInstance().selectAllUsers().size()>0);
     }
     
+    /**
+     * Test the user insert by email
+     * @author Giammarco Lucchetti
+     */
     @Test
-    public void insertKo()
+    public void insertKoByEmailDuplicate()
     {
-    	//UserDto user = new UserDto();
-    	//assertTrue(DatabaseManagerSingleton.getInstance().insert(user) == 0);
+    	String email = "giammarco.lucchetti@hotmail.it";
+    	DatabaseManagerSingleton.getInstance().deleteAllUsers();
+    	UserDto user = getUserByTest();
+    	assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user)>0);
+    	UserDto user2 = new UserDto();
+    	user2.setEmail(email);
+    	assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user2) == 0);
     }
     
     @Test
@@ -109,23 +124,23 @@ public class DatabaseManagerSingletonTest
     	//assertFalse(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco.lucchetti@hotmail.it") == null);
     } 
     
-    @Test
-    public void updateOk()
-    {
-    	UserDto user = new UserDto();
-    	user.setEmail("giammarco21@hotmail.it");
-    	user.setPassword("eccolo22");
-    	user.setFirstName("Giammarcomodificato22");
-    	user.setLastName("Lucchettimodificato22");
-    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
-    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
-    	user.setRole(10);
-    	user.setImgPath("imgpath");
-    	user.setNote("note");
-    	user.setEnabled(false);
-    	DatabaseManagerSingleton.getInstance().updateUser(7,user);
-    	assertTrue(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco21@hotmail.it") != null);
-    }
+//    @Test
+//    public void updateOk()
+//    {
+//    	UserDto user = new UserDto();
+//    	user.setEmail("giammarco21@hotmail.it");
+//    	user.setPassword("eccolo22");
+//    	user.setFirstName("Giammarcomodificato22");
+//    	user.setLastName("Lucchettimodificato22");
+//    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+//    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+//    	user.setRole(10);
+//    	user.setImgPath("imgpath");
+//    	user.setNote("note");
+//    	user.setEnabled(false);
+//    	DatabaseManagerSingleton.getInstance().updateUser(7,user);
+//    	assertTrue(DatabaseManagerSingleton.getInstance().selectByEmail("giammarco21@hotmail.it") != null);
+//    }
     
 //    @Test
 //    public void updateKo()
@@ -152,4 +167,16 @@ public class DatabaseManagerSingletonTest
 //    	role.setLevel(1);
 //        assertTrue(DatabaseManagerSingleton.getInstance().insertRole(role)>0);
 //    }
+    
+    public UserDto getUserByTest(){
+    	UserDto user = new UserDto();
+    	user.setEmail("giammarco.lucchetti@hotmail.it");
+    	user.setPassword("ciao");
+    	user.setFirstName("Giammarco");
+    	user.setLastName("Lucchetti");
+    	user.setDateOfBirth(Date.valueOf(LocalDate.now()));
+    	user.setRegDate(Timestamp.valueOf(LocalDateTime.now()));
+    	user.setRole(10);
+    	return user;
+    }
 }

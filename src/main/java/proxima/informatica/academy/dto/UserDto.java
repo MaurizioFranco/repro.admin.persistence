@@ -12,31 +12,45 @@ public class UserDto {
 	private Integer id;
 	private String email;
 	private String password;
-	private String firstName;
-	private String lastName;
-	private Date dateOfBirth;
-	private Timestamp regDate;
+	private String firstname;
+	private String lastname;
+	private Date dateofbirth;
+	private Timestamp regdate;
 	private Integer role;
-	private String imgPath;
+	private String imgpath;
 	private String note;
 	private Boolean enabled;
-	
-	public UserDto(Integer id, String email, String password, String firstName, String lastName, Date date,
+	/**
+	 * @param id
+	 * @param email
+	 * @param password
+	 * @param firstname
+	 * @param lastname
+	 * @param dateofbirth
+	 * @param regDate
+	 * @param role
+	 * @param imgPath
+	 * @param note
+	 * @param enabled
+	 */
+	public UserDto(Integer id, String email, String password, String firstname, String lastname, Date dateofbirth,
 			Timestamp regDate, Integer role, String imgPath, String note, Boolean enabled) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfBirth = date;
-		this.regDate = regDate;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.dateofbirth = dateofbirth;
+		this.regdate = regDate;
 		this.role = role;
-		this.imgPath = imgPath;
+		this.imgpath = imgPath;
 		this.note = note;
 		this.enabled = enabled;
 	}
-	
+	/**
+	 * 
+	 */
 	public UserDto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -78,52 +92,52 @@ public class UserDto {
 		this.password = password;
 	}
 	/**
-	 * @return the firstName
+	 * @return the firstname
 	 */
-	public String getFirstName() {
-		return firstName;
+	public String getFirstname() {
+		return firstname;
 	}
 	/**
-	 * @param firstName the firstName to set
+	 * @param firstname the firstname to set
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 	/**
-	 * @return the lastName
+	 * @return the lastname
 	 */
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 	/**
-	 * @param lastName the lastName to set
+	 * @param lastname the lastname to set
 	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	/**
-	 * @return the dateOfBirth
+	 * @return the dateofbirth
 	 */
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public Date getDateofbirth() {
+		return dateofbirth;
 	}
 	/**
-	 * @param dateOfBirth the dateOfBirth to set
+	 * @param dateofbirth the dateofbirth to set
 	 */
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDateofbirth(Date dateofbirth) {
+		this.dateofbirth = dateofbirth;
 	}
 	/**
 	 * @return the regDate
 	 */
-	public Timestamp getRegDate() {
-		return regDate;
+	public Timestamp getRegdate() {
+		return regdate;
 	}
 	/**
 	 * @param regDate the regDate to set
 	 */
-	public void setRegDate(Timestamp regDate) {
-		this.regDate = regDate;
+	public void setRegdate(Timestamp regDate) {
+		this.regdate = regDate;
 	}
 	/**
 	 * @return the role
@@ -140,14 +154,14 @@ public class UserDto {
 	/**
 	 * @return the imgPath
 	 */
-	public String getImgPath() {
-		return imgPath;
+	public String getImgpath() {
+		return imgpath;
 	}
 	/**
 	 * @param imgPath the imgPath to set
 	 */
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+	public void setImgpath(String imgPath) {
+		this.imgpath = imgPath;
 	}
 	/**
 	 * @return the note
@@ -167,20 +181,19 @@ public class UserDto {
 	public Boolean getEnabled() {
 		return enabled;
 	}
-	
 	/**
 	 * @param enabled the enabled to set
 	 */
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", regDate=" + regDate + ", role=" + role
-				+ ", imgPath=" + imgPath + ", note=" + note + ", enabled=" + enabled + "]";
+		return "UserDto [id=" + id + ", email=" + email + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", dateofbirth=" + dateofbirth + ", regDate=" + regdate + ", role=" + role
+				+ ", imgPath=" + imgpath + ", note=" + note + ", enabled=" + enabled + "]";
 	}
+	
 
 
 }

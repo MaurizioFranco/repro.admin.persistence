@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.CandidateStatesDto;
-import proxima.informatica.academy.dto.RoleDto;
-import proxima.informatica.academy.dto.UserDto;
 
 public class CandidateStatesManager {
 		
@@ -64,6 +62,25 @@ public class CandidateStatesManager {
 			}
 			logger.debug("CandidateStatesManager.selectById - END - item: " + item);
 			return item ;
+		}
+		
+		public static boolean deleteAll () {
+			logger.debug("CandidateStatesManager.deleteAll - START");
+			boolean returnFalse = false ;
+			try {
+				Session session = DBManager.getSessionFactory().openSession();
+				session.beginTransaction();
+			    Query<CandidateStatesDto> query = session.createQuery("delete from " + CandidateStatesDto.class.getSimpleName());
+			    query.executeUpdate();
+				session.getTransaction().commit();
+				session.close();	
+				returnFalse = true ;
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+				returnFalse = false ;
+			}
+			logger.debug("CandidateStatesManager.deleteAll - END");   
+			return returnFalse ;
 		}
 		
 		public static void delete (CandidateStatesDto item) {

@@ -7,28 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.CandidateStatesDto;
-import proxima.informatica.academy.dto.RoleDto;
 
 public class CandidateStatesDBManagerTest {
-	private final static Logger logger = LoggerFactory.getLogger(RoleDBManagerTest.class);
-
-	@Test
-	public void test() {
-		System.out.println("#########");
-		System.out.println("TEST INSERT");
-		System.out.println("#########");
-		CandidateStatesDto candidate = new CandidateStatesDto();
-		candidate.setRole_id(3);
-		candidate.setStatus_code(10);
-		candidate.setStatus_color("#FFFFFF");
-		candidate.setStatus_description("testLabel2");
-		candidate.setStatus_label("testlabel3");
-		
-
-		int id_inserted_value = CandidateStatesManager.insert(candidate);
-		logger.debug("@Test --> inserted: " + id_inserted_value);
-		assertTrue(id_inserted_value > 0);
-	}
+	private final static Logger logger = LoggerFactory.getLogger(CandidateStatesManager.class);
 	
 	@Test
 	public void testInsertOk() {
@@ -38,7 +19,7 @@ public class CandidateStatesDBManagerTest {
 		CandidateStatesDto candidateState = new CandidateStatesDto();
 		candidateState.setRole_id(3);
 		candidateState.setStatus_color("#af43g2");
-		candidateState.setStatus_code(11);
+		candidateState.setStatus_code(13);
 		candidateState.setStatus_description("aaaa");  
 		candidateState.setStatus_label("bbbb");    	
     	
@@ -50,4 +31,35 @@ public class CandidateStatesDBManagerTest {
 		System.out.println("TEST INSERT");
 		System.out.println("#########");
 	}
+	
+	@Test
+	public void testDeleteAll() {
+		System.out.println("#########");
+		System.out.println("TEST DELETE ALL - START");
+		System.out.println("#########");
+		boolean returnValue = CandidateStatesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + returnValue);
+        assertTrue( returnValue );
+        System.out.println("#########");
+		System.out.println("TEST DELETE ALL - END");
+		System.out.println("#########");
+	}
+	
+	@Test
+	public void testSelectAllEmpty() {
+		System.out.println("#########");
+		System.out.println("TEST SELECT ALL EMPTY- START");
+		System.out.println("#########");
+		boolean returnValue = CandidateStatesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + returnValue);
+        assertTrue( returnValue );
+        int selectAllSize = CandidateStatesManager.selectAll().size();
+		logger.debug("@Test --> selectAllSize: " + selectAllSize);
+        assertTrue( selectAllSize==0 );
+        System.out.println("#########");
+        System.out.println("TEST SELECT ALL EMPTY- END");
+		System.out.println("#########");
+	}
+	
+	
 }

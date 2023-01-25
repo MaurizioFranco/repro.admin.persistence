@@ -18,6 +18,7 @@
 		<mapping resource="surveyreplies.hbm.xml" />		
 		<mapping resource="questions.hbm.xml" />		
 		<mapping resource="surveyquestions.hbm.xml" />	
+		<mapping resource="survey.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>

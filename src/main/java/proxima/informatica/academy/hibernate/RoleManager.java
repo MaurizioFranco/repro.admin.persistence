@@ -3,6 +3,9 @@
  */
 package proxima.informatica.academy.hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
@@ -74,7 +77,7 @@ public class RoleManager {
 		try {
 			Session session = DBManager.getSessionFactory().openSession();
 			session.beginTransaction();
-		    Query query = session.createQuery("delete from " + RoleDto.class.getSimpleName());
+		    Query<RoleDto> query = session.createQuery("delete from " + RoleDto.class.getSimpleName());
 		    query.executeUpdate();
 			session.getTransaction().commit();
 			session.close();	
@@ -85,6 +88,23 @@ public class RoleManager {
 		}
 		logger.debug("RoleManager.deleteAll - END");   
 		return returnFalse ;
+	}
+	
+	public static List<RoleDto> selectAll () {
+		logger.debug("RoleManager.selectAll - START");
+		List<RoleDto> list = new ArrayList<RoleDto> () ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+//			session.beginTransaction();
+			Query<RoleDto> query = session.createQuery("SELECT qst FROM " + RoleDto.class.getSimpleName() + " qst");
+			list = query.getResultList();
+//			session.getTransaction().commit();
+			session.close();			
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		logger.debug("RoleManager.selectAll - END - items.size(): " + list.size());
+		return list ;
 	}
 	
 	

@@ -22,7 +22,7 @@ public class UserManager {
 	
 	private final static Logger logger = LoggerFactory.getLogger(UserManager.class);
 	
-	public int insert (UserDto item) {
+	public static int insert (UserDto item) {
 		logger.debug("UserManager.insert - START - item: " + item);
 		int id_inserted_value = 0 ;
 		try {

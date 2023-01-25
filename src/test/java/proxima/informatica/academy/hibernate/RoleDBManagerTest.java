@@ -27,7 +27,7 @@ public class RoleDBManagerTest {
 		System.out.println("#########");
 		RoleDto role = new RoleDto();
 		role.setLabel("testLabel");
-		role.setLevel(10000);
+		role.setLevel(10001);
 		role.setDescription("TEST DESCRIPTION");
     	
     	

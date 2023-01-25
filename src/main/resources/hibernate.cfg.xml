@@ -6,6 +6,7 @@
 <hibernate-configuration>
 
 	<session-factory>
+		<property name="hibernate.generate_statistics">true</property>
 		<property name="hbm2ddl.auto">none</property>
 		<property name="dialect">org.hibernate.dialect.MariaDBDialect </property>
 		<property name="connection.url">jdbc:mariadb://centauri.proximainformatica.com:193/academyfs07_test</property>
@@ -15,6 +16,7 @@
 		<mapping resource="user.hbm.xml" />
 		<mapping resource="role.hbm.xml" />	
 		<mapping resource="surveyreplies.hbm.xml" />		
+		<mapping resource="questions.hbm.xml" />		
 	</session-factory>
 
 </hibernate-configuration>

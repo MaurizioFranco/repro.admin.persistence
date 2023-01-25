@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="proxima.informatica.academy.dto.RoleDto" table="roles">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+
+		<property name="label"></property>
+		<property name="description"></property>
+		<property name="ansa"></property>
+		<property name="ansb"></property>
+		<property name="ansc"></property>
+		<property name="ansd"></property>
+		<property name="anse"></property>
+		<property name="ansf"></property>
+		<property name="ansg"></property>
+		<property name="ansh"></property>
+		<property name="cansa"></property>
+		<property name="cansb"></property>
+		<property name="cansc"></property>
+		<property name="cansd"></property>
+		<property name="canse"></property>
+		<property name="cansf"></property>
+		<property name="cansg"></property>
+		<property name="cansh"></property>
+		<property name="full_answer"></property>
+	</class>
+
+</hibernate-mapping>

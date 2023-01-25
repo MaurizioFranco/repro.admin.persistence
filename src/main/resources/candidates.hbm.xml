@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="proxima.informatica.academy.dto.CandidatesDto" table="candidates">
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+
+		<property name="user_id"></property>
+		<property name="domicile_city"></property>
+		<property name="study_qualification"></property>
+		<property name="graduate"></property>
+		<property name="high_graduate"></property>
+		<property name="still_high_study"></property>
+		<property name="mobile"></property>
+		<property name="cv_external_path"></property>
+		<property name="course_code"></property>
+		<property name="candidacy_date_time"></property>
+		<property name="label"></property>
+		<property name="firstname"></property>
+		<property name="lastname"></property>
+		<property name="email"></property>
+		<property name="dateofbirth"></property>
+		<property name="regdate"></property>
+		<property name="technical_note"></property>
+		<property name="hr_note"></property>
+		<property name="inserted_by"></property>
+		<property name="imgpath"></property>
+		<property name="candidate_state_code"></property>
+	</class>
+
+</hibernate-mapping>

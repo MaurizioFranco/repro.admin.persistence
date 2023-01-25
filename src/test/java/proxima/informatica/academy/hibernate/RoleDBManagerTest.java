@@ -36,4 +36,17 @@ public class RoleDBManagerTest {
         assertTrue( id_inserted_value>0 );
 	}
 	
+	@Test
+	public void testDeleteAll() {
+		System.out.println("#########");
+		System.out.println("TEST DELETE ALL - START");
+		System.out.println("#########");
+		boolean returnValue = RoleManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + returnValue);
+        assertTrue( returnValue );
+        System.out.println("#########");
+		System.out.println("TEST DELETE ALL - END");
+		System.out.println("#########");
+	}
+	
 }

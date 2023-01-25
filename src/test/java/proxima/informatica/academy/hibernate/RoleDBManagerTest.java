@@ -21,7 +21,7 @@ public class RoleDBManagerTest {
 	private final static Logger logger = LoggerFactory.getLogger(RoleDBManagerTest.class);
 	
 	@Test
-	public void test2() {
+	public void testInsertOk() {
 		System.out.println("#########");
 		System.out.println("TEST INSERT");
 		System.out.println("#########");
@@ -34,6 +34,9 @@ public class RoleDBManagerTest {
     	int id_inserted_value = RoleManager.insert(role);
 		logger.debug("@Test --> inserted: " + id_inserted_value);
         assertTrue( id_inserted_value>0 );
+        System.out.println("#########");
+		System.out.println("TEST INSERT");
+		System.out.println("#########");
 	}
 	
 	@Test

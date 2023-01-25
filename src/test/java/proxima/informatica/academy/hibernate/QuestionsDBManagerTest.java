@@ -9,7 +9,7 @@ import proxima.informatica.academy.dto.QuestionsDto;
 
 public class QuestionsDBManagerTest {
 
-	private final static Logger logger = LoggerFactory.getLogger(RoleDBManagerTest.class);
+	private final static Logger logger = LoggerFactory.getLogger(QuestionsDBManagerTest.class);
 	
 	@Test
 	public void test2() {

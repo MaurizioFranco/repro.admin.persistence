@@ -28,6 +28,42 @@ public class QuestionsDto {
 	
 
 	
+	public QuestionsDto(Integer id, String label, String description, String ansa, String ansb, String ansc,
+			String ansd, String anse, String ansf, String ansg, String ansh, Boolean cansa, Boolean cansb,
+			Boolean cansc, Boolean cansd, Boolean canse, Boolean cansf, Boolean cansg, Boolean cansh,
+			String full_answer) {
+		super();
+		this.id = id;
+		this.label = label;
+		this.description = description;
+		this.ansa = ansa;
+		this.ansb = ansb;
+		this.ansc = ansc;
+		this.ansd = ansd;
+		this.anse = anse;
+		this.ansf = ansf;
+		this.ansg = ansg;
+		this.ansh = ansh;
+		this.cansa = cansa;
+		this.cansb = cansb;
+		this.cansc = cansc;
+		this.cansd = cansd;
+		this.canse = canse;
+		this.cansf = cansf;
+		this.cansg = cansg;
+		this.cansh = cansh;
+		this.full_answer = full_answer;
+	}
+
+
+
+	public QuestionsDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "QuestionsDto [id=" + id + ", label=" + label + ", description=" + description + ", ansa=" + ansa

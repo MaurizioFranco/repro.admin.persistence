@@ -9,7 +9,7 @@ import proxima.informatica.academy.dto.QuestionsDto;
 
 public class QuestionsManager {
 
-	private final static Logger logger = LoggerFactory.getLogger(RoleManager.class);
+	private final static Logger logger = LoggerFactory.getLogger(QuestionsManager.class);
 
 	public static int insert(QuestionsDto item) {
 		logger.debug("QuestionsDto.insert - START - item: " + item);
@@ -25,6 +25,7 @@ public class QuestionsManager {
 			System.out.println("Gen Id trovato");
 			id_inserted_value = ((Integer) generatedIdentifier).intValue();
 			System.out.println("ID ritornato: " + id_inserted_value);
+			System.out.println("Questions: " + item.toString());
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {

@@ -14,8 +14,8 @@ public class SurveyrepliesDto {
 	private Integer id;
 	private BigInteger survey_id;
 	private BigInteger user_id;
-	private Date starttime;
-	private Date endtime;
+	private Timestamp starttime;
+	private Timestamp endtime;
 	private String answers;
 	private String pdffilename;
 	private String points;
@@ -27,7 +27,7 @@ public class SurveyrepliesDto {
 	}
 
 
-	public SurveyrepliesDto(Integer id, BigInteger survey_id, BigInteger user_id, Date starttime, Date endtime,
+	public SurveyrepliesDto(Integer id, BigInteger survey_id, BigInteger user_id, Timestamp starttime, Timestamp endtime,
 			String answers, String pdffilename, String points) {
 		super();
 		this.id = id;
@@ -92,7 +92,7 @@ public class SurveyrepliesDto {
 	/**
 	 * @return the starttime
 	 */
-	public Date getStarttime() {
+	public Timestamp getStarttime() {
 		return starttime;
 	}
 
@@ -100,7 +100,7 @@ public class SurveyrepliesDto {
 	/**
 	 * @param starttime the starttime to set
 	 */
-	public void setStarttime(Date starttime) {
+	public void setStarttime(Timestamp starttime) {
 		this.starttime = starttime;
 	}
 
@@ -108,7 +108,7 @@ public class SurveyrepliesDto {
 	/**
 	 * @return the endtime
 	 */
-	public Date getEndtime() {
+	public Timestamp getEndtime() {
 		return endtime;
 	}
 
@@ -116,7 +116,7 @@ public class SurveyrepliesDto {
 	/**
 	 * @param endtime the endtime to set
 	 */
-	public void setEndtime(Date endtime) {
+	public void setEndtime(Timestamp endtime) {
 		this.endtime = endtime;
 	}
 

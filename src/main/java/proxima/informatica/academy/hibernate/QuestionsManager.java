@@ -1,6 +1,7 @@
 package proxima.informatica.academy.hibernate;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,5 +33,24 @@ public class QuestionsManager {
 //		logger.debug("QuestionsDto.insert - END - id_inserted_value: " + id_inserted_value);
 		System.out.println("ID ritornato: " + id_inserted_value);
 		return id_inserted_value;
+	}
+	
+	public static boolean deleteAll () {
+		logger.debug("RoleManager.deleteAll - START");
+		boolean returnFalse = false ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+		    Query query = session.createQuery("delete from " + QuestionsDto.class.getSimpleName());
+		    query.executeUpdate();
+			session.getTransaction().commit();
+			session.close();	
+			returnFalse = true ;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			returnFalse = false ;
+		}
+		logger.debug("RoleManager.deleteAll - END");   
+		return returnFalse ;
 	}
 }

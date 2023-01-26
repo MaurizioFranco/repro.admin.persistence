@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.RoleDto;
 import proxima.informatica.academy.dto.SurveyDto;
+import proxima.informatica.academy.dto.SurveyquestionsDto;
 import proxima.informatica.academy.dto.SurveyrepliesDto;
 import proxima.informatica.academy.dto.UserDto;
 
@@ -34,11 +36,15 @@ public class SurveyrepliesDBManagerTest {
 		System.out.println("#########");
 		System.out.println("TEST INSERT");
 		System.out.println("#########");
-		
-		assertTrue(SurveyrepliesManager.deleteAll());
-		assertTrue(SurveyManager.deleteAll());
-		assertTrue(UserManager.deleteAll());
-		
+		boolean deleteSurveyReplies = SurveyrepliesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurveyReplies);
+		assertTrue( deleteSurveyReplies );
+		boolean deleteSurvey = SurveyManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurvey);
+		assertTrue( deleteSurvey );
+		boolean deleteUser = UserManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteUser);
+		assertTrue( deleteUser );
 		SurveyrepliesDto surveyreplies = insertAllTables();
     	Session session = DBManager.getSessionFactory().openSession();
         session.beginTransaction();
@@ -50,19 +56,17 @@ public class SurveyrepliesDBManagerTest {
 	}
 	
 	@Test
-	public void testDeleteAll() {
+	public void testDeleteAllOK() {
 		System.out.println("#########");
 		System.out.println("TEST DELETE ALL - START");
 		System.out.println("#########");
-		
 		SurveyrepliesDto surveyreplies = insertAllTables();
     	Session session = DBManager.getSessionFactory().openSession();
         int id_inserted_value_surveyreplies = SurveyrepliesManager.insert(surveyreplies);
 		logger.debug("@Test --> inserted: " + id_inserted_value_surveyreplies);
-        assertTrue( id_inserted_value_surveyreplies >0 );
-			
+        assertTrue( id_inserted_value_surveyreplies >0 );	
+        session.beginTransaction();
 		boolean returnValue = SurveyrepliesManager.deleteAll();
-		session.beginTransaction();
 		session.getTransaction().commit();
 		session.close();
 		logger.debug("@Test --> returnValue: " + returnValue);
@@ -73,20 +77,46 @@ public class SurveyrepliesDBManagerTest {
 	}
 	
 	@Test
-	public void testSelectAllEmpty() {
+	public void testDeleteOK() {
+		System.out.println("#########");
+		System.out.println("TEST DELETE");
+		System.out.println("#########");
+		boolean deleteSurveyReplies = SurveyrepliesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurveyReplies);
+		assertTrue( deleteSurveyReplies );
+		boolean deleteSurvey = SurveyManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurvey);
+		assertTrue( deleteSurvey );
+		boolean deleteUser = UserManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteUser);
+		assertTrue( deleteUser );
+		SurveyrepliesDto surveyreplies = insertAllTables();
+    	Session session = DBManager.getSessionFactory().openSession();
+        assertTrue(SurveyrepliesManager.insert(surveyreplies)>0);
+        SurveyrepliesManager.delete(surveyreplies);
+		session.beginTransaction();
+		session.getTransaction().commit();
+		session.close();
+		assertTrue(SurveyquestionsManager.selectAll().size() == 0);
+	}
+	
+	@Test
+	public void testSelectAllEmptyOK() {
 		System.out.println("#########");
 		System.out.println("TEST SELECT ALL EMPTY- START");
 		System.out.println("#########");
-		
-		SurveyrepliesDto surveyreplies = new SurveyrepliesDto();
-		BigInteger surveyreplies_id = new BigInteger("5");
-		BigInteger userreplies_id = new BigInteger("37");
-		surveyreplies.setSurvey_id(surveyreplies_id);
-		surveyreplies.setUser_id(userreplies_id);
-		Session session = DBManager.getSessionFactory().openSession();
-        int id_inserted_value_surveyreplies = SurveyrepliesManager.insert(surveyreplies);
-        assertTrue( id_inserted_value_surveyreplies >0 );
-		
+		boolean deleteSurveyReplies = SurveyrepliesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurveyReplies);
+		assertTrue( deleteSurveyReplies );
+		boolean deleteSurvey = SurveyManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurvey);
+		assertTrue( deleteSurvey );
+		boolean deleteUser = UserManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteUser);
+		assertTrue( deleteUser );
+		SurveyrepliesDto surveyreplies = insertAllTables();
+    	Session session = DBManager.getSessionFactory().openSession();
+        assertTrue(SurveyrepliesManager.insert(surveyreplies)>0);
         boolean returnValue = SurveyrepliesManager.deleteAll();
         logger.debug("@Test --> returnValue: " + returnValue);
         assertTrue( returnValue );
@@ -102,25 +132,57 @@ public class SurveyrepliesDBManagerTest {
 	}
 	
 	@Test
-	public void testSelectAllForOne() {
+	public void testSelectAllOK() {
+		System.out.println("#########");
+		System.out.println("TEST SELECT ALL - START");
+		System.out.println("#########");
+		boolean deleteSurveyReplies = SurveyrepliesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurveyReplies);
+		assertTrue( deleteSurveyReplies );
+		boolean deleteSurvey = SurveyManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurvey);
+		assertTrue( deleteSurvey );
+		boolean deleteUser = UserManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteUser);
+		assertTrue( deleteUser );
+		SurveyrepliesDto surveyreplies = insertAllTables();
+    	Session session = DBManager.getSessionFactory().openSession();
+        session.beginTransaction();
+        assertTrue(SurveyrepliesManager.insert(surveyreplies)>0);
+        session.getTransaction().commit();
+        session.close();
+        int selectAllSize = SurveyrepliesManager.selectAll().size();
+		logger.debug("@Test --> selectAllSize: " + selectAllSize);
+        assertTrue( selectAllSize>0 );
+        System.out.println("#########");
+        System.out.println("TEST SELECT ALL - END");
+		System.out.println("#########");
+	}
+	
+	@Test
+	public void testSelectAllForOneOK() {
 		System.out.println("#########");
 		System.out.println("TEST SELECT ALL FOR ONE - START");
 		System.out.println("#########");
-		boolean returnValue = SurveyrepliesManager.deleteAll();
-		logger.debug("@Test --> returnValue: " + returnValue);
-        assertTrue( returnValue );
+		boolean deleteSurveyReplies = SurveyrepliesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurveyReplies);
+		assertTrue( deleteSurveyReplies );
+		boolean deleteSurvey = SurveyManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurvey);
+		assertTrue( deleteSurvey );
+		boolean deleteUser = UserManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteUser);
+		assertTrue( deleteUser );
+		int selectAllSurveyReplies = SurveyrepliesManager.selectAll().size();
+		logger.debug("@Test --> returnValue: " + selectAllSurveyReplies);
+		assertTrue( selectAllSurveyReplies == 0 );
+		SurveyrepliesDto surveyreplies = insertAllTables();
+    	Session session = DBManager.getSessionFactory().openSession();
+        session.beginTransaction();
+        assertTrue(SurveyrepliesManager.insert(surveyreplies)>0);
+        session.getTransaction().commit();
+        session.close();       
         int selectAllSize = SurveyrepliesManager.selectAll().size();
-		logger.debug("@Test --> selectAllSize: " + selectAllSize);
-        assertTrue( selectAllSize==0 );
-        SurveyrepliesDto survey = new SurveyrepliesDto();
-        BigInteger survey_id = new BigInteger("1");
-		BigInteger user_id = new BigInteger("33");
-		survey.setSurvey_id(survey_id);
-		survey.setUser_id(user_id);
-    	int id_inserted_value = SurveyrepliesManager.insert(survey);
-		logger.debug("@Test --> inserted: " + id_inserted_value);
-        assertTrue( id_inserted_value>0 );        
-        selectAllSize = SurveyrepliesManager.selectAll().size();
 		logger.debug("@Test --> selectAllSize: " + selectAllSize);
         assertTrue( selectAllSize==1 );
         System.out.println("#########");
@@ -128,7 +190,37 @@ public class SurveyrepliesDBManagerTest {
 		System.out.println("#########");
 	}
 	
-	
+	@Test
+	public void testSelectByIdOK () {
+		
+		System.out.println("#########");
+		System.out.println("TEST SELECTBYID - START");
+		System.out.println("#########");
+		boolean deleteSurveyReplies = SurveyrepliesManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurveyReplies);
+		assertTrue( deleteSurveyReplies );
+		boolean deleteSurvey = SurveyManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteSurvey);
+		assertTrue( deleteSurvey );
+		boolean deleteUser = UserManager.deleteAll();
+		logger.debug("@Test --> returnValue: " + deleteUser);
+		assertTrue( deleteUser );
+		int selectAllSurveyReplies = SurveyrepliesManager.selectAll().size();
+		logger.debug("@Test --> returnValue: " + selectAllSurveyReplies);
+		assertTrue( selectAllSurveyReplies == 0 );
+		SurveyrepliesDto surveyreplies = insertAllTables();
+    	Session session = DBManager.getSessionFactory().openSession();
+        session.beginTransaction();
+        assertTrue(SurveyrepliesManager.insert(surveyreplies)>0);
+        session.getTransaction().commit();
+        session.close();
+		List<SurveyrepliesDto> selectAll = SurveyrepliesManager.selectAll();
+		surveyreplies = SurveyrepliesManager.selectById(selectAll.get(0).getId());
+		assertTrue( surveyreplies != null);
+		System.out.println("#########");
+		System.out.println("TEST SELECTBYID - END");
+		System.out.println("#########");
+	}
 	
 	public SurveyrepliesDto insertAllTables() {
 		SurveyDto survey = new SurveyDto();

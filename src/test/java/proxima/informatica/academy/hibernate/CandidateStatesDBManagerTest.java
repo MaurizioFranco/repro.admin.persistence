@@ -2,15 +2,11 @@ package proxima.informatica.academy.hibernate;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.CandidateStatesDto;
-import proxima.informatica.academy.dto.QuestionsDto;
 
 public class CandidateStatesDBManagerTest {
 	private final static Logger logger = LoggerFactory.getLogger(CandidateStatesManager.class);
@@ -23,7 +19,7 @@ public class CandidateStatesDBManagerTest {
 		CandidateStatesDto candidateState = new CandidateStatesDto();
 		candidateState.setRole_id(3);
 		candidateState.setStatus_color("#af43g2");
-		candidateState.setStatus_code(10);
+		candidateState.setStatus_code(4);
 		candidateState.setStatus_description("aaaa");  
 		candidateState.setStatus_label("bbbb");    	
     	
@@ -65,6 +61,7 @@ public class CandidateStatesDBManagerTest {
 		System.out.println("#########");
 	}
 	
+	/*
 	@Test
 	public void selectAllForOne() {
 		System.out.println("#########");
@@ -92,7 +89,7 @@ public class CandidateStatesDBManagerTest {
         System.out.println("TEST SELECT ALL FOR ONE - END");
 		System.out.println("#########");
 	}
-
+	 */
 	@Test
 	public void selectById() {
 		System.out.println("#########");

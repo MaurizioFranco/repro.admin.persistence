@@ -1,9 +1,5 @@
 package proxima.informatica.academy.hibernate;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +45,7 @@ public class CandidateStatesManager {
 				logger.error(e.getMessage(), e);
 			}
 			logger.debug("CandidateStatesManager.selectAll - END - items.size(): " + list.size());
-			return list ;
+			return list;
 		}
 		
 		public static CandidateStatesDto selectById (int id) {

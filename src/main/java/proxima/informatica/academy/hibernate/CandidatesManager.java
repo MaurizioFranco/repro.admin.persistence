@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.CandidatesDto;
+import proxima.informatica.academy.dto.SurveyDto;
 
 /**
  * 
@@ -20,7 +21,7 @@ import proxima.informatica.academy.dto.CandidatesDto;
  * @author AntoIannaccone
  *
  */
-public class CandidatesManager {
+public class CandidatesManager extends AbstractDBManager {
 	
 	private final static Logger logger = LoggerFactory.getLogger(CandidatesManager.class);
 	
@@ -55,41 +56,6 @@ public class CandidatesManager {
 		logger.debug("CandidatesManager.delete - END");        
 	}
 	
-	public static CandidatesDto selectById (int id) {
-		logger.debug("CandidatesManager.selectById - START - id: " + id);
-		CandidatesDto item = null ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-            item = session.get(CandidatesDto.class, id);
-			session.getTransaction().commit();
-			session.close();			
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("CandidatesManager.selectById - END - item: " + item);
-		return item ;
-	}
-	
-	public static boolean deleteAll () {
-		logger.debug("CandidatesManager.deleteAll - START");
-		boolean returnFalse = false ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-		    Query<CandidatesDto> query = session.createQuery("delete from " + CandidatesDto.class.getSimpleName());
-		    query.executeUpdate();
-			session.getTransaction().commit();
-			session.close();	
-			returnFalse = true ;
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			returnFalse = false ;
-		}
-		logger.debug("CandidatesManager.deleteAll - END");   
-		return returnFalse ;
-	}
-	
 	public static List<CandidatesDto> selectAll () {
 		logger.debug("CandidatesManager.selectAll - START");
 		List<CandidatesDto> list = new ArrayList<CandidatesDto> () ;
@@ -106,5 +72,13 @@ public class CandidatesManager {
 		logger.debug("CandidatesManager.selectAll - END - items.size(): " + list.size());
 		return list ;
 	}
+	
+	public static boolean deleteAll () {		
+		return deleteAll(CandidatesDto.class) ;		
+	}
+    
+    public static CandidatesDto selectById (int id) {
+    	return (CandidatesDto)selectById (id, CandidatesDto.class);
+    }
 
 }

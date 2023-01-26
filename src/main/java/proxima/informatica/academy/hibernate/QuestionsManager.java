@@ -8,52 +8,16 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import proxima.informatica.academy.dto.AbstractCommonDto;
 import proxima.informatica.academy.dto.QuestionsDto;
 import proxima.informatica.academy.dto.RoleDto;
 
-public class QuestionsManager {
+public class QuestionsManager extends AbstractDBManager{
 
 	private final static Logger logger = LoggerFactory.getLogger(QuestionsManager.class);
-
-	public static int insert(QuestionsDto item) {
-		logger.debug("QuestionsDto.insert - START - item: " + item);
-		int id_inserted_value = 0;
-		try {
-			System.out.println("all'interno del try");
-			System.out.println("Item: " + item.toString());
-			Session session = DBManager.getSessionFactory().openSession();
-			System.out.println("aperta session");
-			session.beginTransaction();
-			System.out.println("inizializzata session");
-			Object generatedIdentifier = session.save(item);
-			System.out.println("Gen Id trovato");
-			id_inserted_value = ((Integer) generatedIdentifier).intValue();
-			System.out.println("ID ritornato: " + id_inserted_value);
-			System.out.println("Questions: " + item.toString());
-			session.getTransaction().commit();
-			session.close();
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-//		logger.debug("QuestionsDto.insert - END - id_inserted_value: " + id_inserted_value);
-		System.out.println("ID ritornato: " + id_inserted_value);
-		return id_inserted_value;
-	}
 	
 	public static QuestionsDto selectById(int id) {
-		logger.debug("QuestionsManager.delete - START - id: " + id);
-		QuestionsDto item = null ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-//			session.beginTransaction();
-            item = session.get(QuestionsDto.class, id);
-//			session.getTransaction().commit();
-			session.close();			
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("QuestionsDto.selectById - END - item: " + item);
-		return item ;
+		return (QuestionsDto) selectById(id, QuestionsDto.class);
 	}
 	
 	public static boolean deleteById(int id) {
@@ -76,22 +40,7 @@ public class QuestionsManager {
 	}
 	
 	public static boolean deleteAll () {
-		logger.debug("RoleManager.deleteAll - START");
-		boolean returnValue = false ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-		    Query query = session.createQuery("delete from " + QuestionsDto.class.getSimpleName());
-		    query.executeUpdate();
-			session.getTransaction().commit();
-			session.close();	
-			returnValue = true ;
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			returnValue = false ;
-		}
-		logger.debug("RoleManager.deleteAll - END");   
-		return returnValue ;
+		return deleteAll(QuestionsDto.class);
 	}
 	
 	public static List<QuestionsDto> selectAll () {

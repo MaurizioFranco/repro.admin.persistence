@@ -15,9 +15,9 @@ public class SurveyquestionsManagerTest {
 
 	@Test
 	public void deleteAllOK() {
-		System.out.println("#########");
-		System.out.println("TEST DELETE ALL");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST DELETE ALL");
+		logger.debug("#########");
 		SurveyquestionsManager.deleteAll();
 		SurveyquestionsDto sq = new SurveyquestionsDto();
 		sq.setQuestionId(1);
@@ -28,9 +28,9 @@ public class SurveyquestionsManagerTest {
 
 	@Test
 	public void insertOK() {
-		System.out.println("#########");
-		System.out.println("TEST INSERT");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST INSERT");
+		logger.debug("#########");
 		SurveyquestionsManager.deleteAll();
 		SurveyquestionsDto sq = new SurveyquestionsDto();
 		sq.setQuestionId(1);
@@ -43,9 +43,9 @@ public class SurveyquestionsManagerTest {
 
 	@Test
 	public void selectAllOK() {
-		System.out.println("#########");
-		System.out.println("TEST SELECT ALL");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECT ALL");
+		logger.debug("#########");
 		SurveyquestionsManager.deleteAll();
 		SurveyquestionsDto sq = new SurveyquestionsDto();
 		sq.setQuestionId(1);
@@ -56,9 +56,9 @@ public class SurveyquestionsManagerTest {
 
 	@Test
 	public void selectByIdOK() {
-		System.out.println("#########");
-		System.out.println("TEST SELECT BY ID");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECT BY ID");
+		logger.debug("#########");
 		SurveyquestionsManager.deleteAll();
 		SurveyquestionsDto sq = new SurveyquestionsDto();
 		sq.setQuestionId(1);
@@ -70,9 +70,9 @@ public class SurveyquestionsManagerTest {
 
 	@Test
 	public void deleteOK() {
-		System.out.println("#########");
-		System.out.println("TEST DELETE");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST DELETE");
+		logger.debug("#########");
 		SurveyquestionsManager.deleteAll();
 		SurveyquestionsDto sq = new SurveyquestionsDto();
 		sq.setQuestionId(1);

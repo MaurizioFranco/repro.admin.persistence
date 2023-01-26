@@ -10,7 +10,11 @@ import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.SurveyquestionsDto;
 
-
+/**
+ * 
+ * @author Giacomo Della Luna
+ *
+ */
 public class SurveyquestionsManager {
 	
 	private final static Logger logger = LoggerFactory.getLogger(SurveyquestionsManager.class);

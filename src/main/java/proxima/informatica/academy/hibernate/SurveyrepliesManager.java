@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.RoleDto;
+import proxima.informatica.academy.dto.SurveyDto;
 import proxima.informatica.academy.dto.SurveyrepliesDto;
 import proxima.informatica.academy.dto.UserDto;
 
@@ -22,7 +23,7 @@ import proxima.informatica.academy.dto.UserDto;
  * @author maurizio.franco@ymail.com
  *
  */
-public class SurveyrepliesManager {
+public class SurveyrepliesManager extends AbstractDBManager{
 	
 	private final static Logger logger = LoggerFactory.getLogger(SurveyrepliesManager.class);
 	
@@ -57,39 +58,6 @@ public class SurveyrepliesManager {
 		logger.debug("SurveyrepliesDto.delete - END");        
 	}
 	
-	public static SurveyrepliesDto selectById (int id) {
-		logger.debug("SurveyrepliesDto.selectById - START - id: " + id);
-		SurveyrepliesDto item = null ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-            item = session.get(SurveyrepliesDto.class, id);
-			session.close();			
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("SurveyrepliesDto.selectById - END - item: " + item);
-		return item ;
-	}
-	
-	public static boolean deleteAll () {
-		logger.debug("SurveyrepliesDto.deleteAll - START");
-		boolean returnFalse = false ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-		    Query<SurveyrepliesDto> query = session.createQuery("delete from " + SurveyrepliesDto.class.getSimpleName());
-		    query.executeUpdate();
-			session.getTransaction().commit();
-			session.close();	
-			returnFalse = true ;
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			returnFalse = false ;
-		}
-		logger.debug("SurveyrepliesDto.deleteAll - END");   
-		return returnFalse ;
-	}
-	
 	public static List<SurveyrepliesDto> selectAll () {
 		logger.debug("SurveyrepliesDto.selectAll - START");
 		List<SurveyrepliesDto> list = new ArrayList<SurveyrepliesDto> () ;
@@ -104,5 +72,12 @@ public class SurveyrepliesManager {
 		logger.debug("SurveyrepliesDto.selectAll - END - items.size(): " + list.size());
 		return list ;
 	}
-
+	
+    public static boolean deleteAll () {		
+		return deleteAll(SurveyrepliesDto.class) ;		
+	}
+    
+    public static SurveyrepliesDto selectById (int id) {
+    	return (SurveyrepliesDto)selectById (id, SurveyrepliesDto.class);
+    }
 }

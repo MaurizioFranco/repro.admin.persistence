@@ -76,5 +76,20 @@ public class AbstractDBManager {
 		logger.debug("AbstractDBManager.selectById -END itemToReturn: " + itemToReturn);
 		return itemToReturn;
 	}
-
+    
+    public static void deleteById (int id, Class entityClass) {
+    	logger.debug("AbstractDBManager.deleteById - START id: " + id);
+    	AbstractCommonDto item = selectById(id, entityClass);
+    	try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+			session.delete(item);
+			session.getTransaction().commit();
+			session.close();	
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+    	logger.debug("AbstractDBManager.deleteById - END");
+    }
+    	
 }

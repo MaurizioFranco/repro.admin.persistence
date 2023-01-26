@@ -7,9 +7,20 @@ package proxima.informatica.academy.dto;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "candidates")
 public class CandidatesDto {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private Integer user_id;
 	private String domicile_city;
 	private String study_qualification;

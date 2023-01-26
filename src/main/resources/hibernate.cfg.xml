@@ -14,8 +14,8 @@
 		<property name="connection.password">acfs07_test</property>
 		<property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
 		<mapping class="proxima.informatica.academy.dto.QuestionsDto" />		
-		<mapping resource="user.hbm.xml" />				
-		<mapping resource="survey.hbm.xml" />
+		<mapping class="proxima.informatica.academy.dto.UserDto" />				
+		<mapping class="proxima.informatica.academy.dto.SurveyDto" />
 		<mapping class="proxima.informatica.academy.dto.CoursePageDto" />
 		<mapping class="proxima.informatica.academy.dto.CandidatesDto" />
 		<mapping class="proxima.informatica.academy.dto.SurveyquestionsDto" />		

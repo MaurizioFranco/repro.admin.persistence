@@ -1,5 +1,9 @@
 package proxima.informatica.academy.dto;
 
+/**
+ * @author AntoIannaccone
+ */
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 

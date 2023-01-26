@@ -19,9 +19,9 @@
 		<mapping class="proxima.informatica.academy.dto.QuestionsDto" />		
 		<mapping resource="surveyquestions.hbm.xml" />	
 		<mapping resource="survey.hbm.xml" />
-		<mapping resource="candidates.hbm.xml" />		
 		<mapping resource="candidate_states.hbm.xml"/>
 		<mapping class="proxima.informatica.academy.dto.CoursePageDto" />
+		<mapping class="proxima.informatica.academy.dto.CandidatesDto" />		
 	</session-factory>
 
 </hibernate-configuration>

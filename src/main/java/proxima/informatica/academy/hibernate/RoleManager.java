@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.RoleDto;
+import proxima.informatica.academy.dto.SurveyDto;
 
 /**
  * 
@@ -20,26 +21,9 @@ import proxima.informatica.academy.dto.RoleDto;
  * @author maurizio.franco@ymail.com
  *
  */
-public class RoleManager {
+public class RoleManager extends AbstractDBManager {
 	
-	private final static Logger logger = LoggerFactory.getLogger(RoleManager.class);
-	
-	public static int insert (RoleDto item) {
-		logger.debug("RoleManager.insert - START - item: " + item);
-		int id_inserted_value = 0 ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-			Object generatedIdentifier = session.save(item);
-			id_inserted_value = ((Integer)generatedIdentifier).intValue();
-			session.getTransaction().commit();
-			session.close();			
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("RoleManager.insert - END - id_inserted_value: " + id_inserted_value);
-        return id_inserted_value ;
-	}
+	private final static Logger logger = LoggerFactory.getLogger(RoleManager.class);	
 	
 	public static void delete (RoleDto item) {
 		logger.debug("RoleManager.delete - START - item: " + item);
@@ -71,25 +55,6 @@ public class RoleManager {
 		return item ;
 	}
 	
-	public static boolean deleteAll () {
-		logger.debug("RoleManager.deleteAll - START");
-		boolean returnFalse = false ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-		    Query<RoleDto> query = session.createQuery("delete from " + RoleDto.class.getSimpleName());
-		    query.executeUpdate();
-			session.getTransaction().commit();
-			session.close();	
-			returnFalse = true ;
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			returnFalse = false ;
-		}
-		logger.debug("RoleManager.deleteAll - END");   
-		return returnFalse ;
-	}
-	
 	public static List<RoleDto> selectAll () {
 		logger.debug("RoleManager.selectAll - START");
 		List<RoleDto> list = new ArrayList<RoleDto> () ;
@@ -105,6 +70,10 @@ public class RoleManager {
 		}
 		logger.debug("RoleManager.selectAll - END - items.size(): " + list.size());
 		return list ;
+	}
+	
+	public static boolean deleteAll () {		
+		return deleteAll(RoleDto.class) ;		
 	}
 	
 	

@@ -45,7 +45,7 @@ public class CandidateStatesManager {
 				logger.error(e.getMessage(), e);
 			}
 			logger.debug("CandidateStatesManager.selectAll - END - items.size(): " + list.size());
-			return list ;
+			return list;
 		}
 		
 		public static CandidateStatesDto selectById (int id) {
@@ -83,18 +83,21 @@ public class CandidateStatesManager {
 			return returnFalse ;
 		}
 		
-		public static void delete (CandidateStatesDto item) {
+		public static boolean delete (CandidateStatesDto item) {
 			logger.debug("CandidateStatesManager.delete - START - item: " + item);
+			boolean result = false;
 			try {
 				Session session = DBManager.getSessionFactory().openSession();
 				session.beginTransaction();
-				session.delete(item);			
+				session.delete(item);
+				result = true;
 				session.getTransaction().commit();
 				session.close();			
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
 			}
-			logger.debug("CandidateStatesManager.delete - END");        
+			logger.debug("CandidateStatesManager.delete - END");   
+			return result;
 		}
 
 	}

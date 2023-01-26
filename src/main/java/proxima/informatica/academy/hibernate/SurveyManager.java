@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import proxima.informatica.academy.dto.AbstractCommonDto;
 import proxima.informatica.academy.dto.SurveyDto;
 
 /**
@@ -18,29 +19,11 @@ import proxima.informatica.academy.dto.SurveyDto;
  *
  */
 
-public class SurveyManager {
+public class SurveyManager extends AbstractDBManager {
 
 	private final static Logger logger = LoggerFactory.getLogger(SurveyManager.class);
 	
-	public static int insert (SurveyDto survey) {
-		
-		logger.debug("SurveyManager.insert - START - survey: " + survey);
-		int id_inserted_value = 0;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-			Object generatedIdentifier = session.save(survey);
-			id_inserted_value = ((Integer)generatedIdentifier).intValue();
-			session.getTransaction().commit();
-			session.close();
-		} catch (Exception e) {	
-			e.printStackTrace();
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("SurveyManager.insert - END - id_inserte_value: " + id_inserted_value);
-		return id_inserted_value;
-		
-	}
+	
 	
 	public static void delete (SurveyDto survey) {
 		
@@ -56,45 +39,6 @@ public class SurveyManager {
 			logger.error(e.getMessage(), e);
 		}
 		logger.debug("SurveyManager.delete - END");
-		
-	}
-	
-	public static SurveyDto selectById (int id) {
-		
-		logger.debug("SurveyManager.selectById - START id: " + id);
-		SurveyDto survey = null;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-			survey = session.get(SurveyDto.class, id);
-			session.getTransaction().commit();
-			session.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("SurveyManager.selectById -END survey: " + survey);
-		return survey;
-	}
-	
-	public static boolean deleteAll () {
-		
-		logger.debug("SurveyManager.deleteAll - START");
-		boolean returnFalse = false ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-			Query<SurveyDto> query = session.createQuery("delete from " + SurveyDto.class.getSimpleName());
-			query.executeUpdate();
-			session.getTransaction().commit();
-			session.close();	
-			returnFalse = true ;
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			returnFalse = false ;
-		}
-		logger.debug("SurveyManager.deleteAll - END");   
-		return returnFalse ;
 		
 	}
 	
@@ -118,7 +62,13 @@ public class SurveyManager {
 		
 	}
 	
-	
+    public static boolean deleteAll () {		
+		return deleteAll(SurveyDto.class) ;		
+	}
+    
+    public static SurveyDto selectById (int id) {
+    	return (SurveyDto)selectById (id, SurveyDto.class);
+    }
 	
 	
 	

@@ -1,9 +1,21 @@
 package proxima.informatica.academy.dto;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  * @author Marco Fabretti
  */
+
+@Entity
+@Table(name = "candidate_states")
+
 public class CandidateStatesDto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	Integer role_id;
 	Integer status_code;

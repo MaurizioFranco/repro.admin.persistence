@@ -3,7 +3,7 @@ package proxima.informatica.academy.dto;
 /**
  * @author Giammarco Lucchetti
  */
-public class RoleDto {
+public class RoleDto extends AbstractCommonDto {
 	private Integer id;
 	private String label;
 	private String description;

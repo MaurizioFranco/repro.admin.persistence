@@ -4,7 +4,7 @@ package proxima.informatica.academy.dto;
  * @author matteo.peruzza@gmail.com
  */
 
-public class SurveyDto {
+public class SurveyDto extends AbstractCommonDto {
 
 	private Integer id;					//auto-increment / primary-key / not null
 	private String label;				//not null

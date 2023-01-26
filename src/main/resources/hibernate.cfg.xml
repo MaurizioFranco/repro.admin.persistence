@@ -16,7 +16,7 @@
 		<mapping resource="user.hbm.xml" />
 		<mapping resource="role.hbm.xml" />	
 		<mapping resource="surveyreplies.hbm.xml" />		
-		<mapping resource="questions.hbm.xml" />		
+		<mapping class="proxima.informatica.academy.dto.QuestionsDto" />		
 		<mapping resource="surveyquestions.hbm.xml" />	
 		<mapping resource="survey.hbm.xml" />
 		<mapping resource="candidates.hbm.xml" />		

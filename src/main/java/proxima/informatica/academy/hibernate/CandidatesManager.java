@@ -91,7 +91,7 @@ public class CandidatesManager extends AbstractDBManager {
 		return returnFalse ;
 	}
 	
-	public static List<AbstractCommonDto> selectAll (Class CandidatesDto) {
+	public static List<AbstractCommonDto> selectAll () {
 		
 		return selectAll(CandidatesDto.class);
 	}

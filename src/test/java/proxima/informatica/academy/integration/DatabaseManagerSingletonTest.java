@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import proxima.informatica.academy.DatabaseManagerSingleton;
 import proxima.informatica.academy.dto.UserDto;
+import proxima.informatica.academy.hibernate.UserManager;
 
 /**
  * @author Giammarco Lucchetti
@@ -122,7 +123,7 @@ public class DatabaseManagerSingletonTest
     	user.setRegdate(Timestamp.valueOf(LocalDateTime.now()));
     	user.setRole(10);
     	assertTrue(DatabaseManagerSingleton.getInstance().insertUser(user) > 0);
-    	int id = DatabaseManagerSingleton.getInstance().selectByEmail(user.getEmail()).getId();
+    	int id = UserManager.findByEmail(user.getEmail()).getId();
     	assertTrue(DatabaseManagerSingleton.getInstance().deleteRowUsers(id));
     	assertTrue(DatabaseManagerSingleton.getInstance().selectByUserId(id) == null);    	
     }

@@ -66,5 +66,35 @@ public class UserManager extends AbstractDBManager{
     public static UserDto selectById (int id) {
     	return (UserDto)selectById (id, UserDto.class);
     }
+    
+    public static UserDto findByEmail(String email) {
+		logger.info("findByEmail - START - with email: " + email);
+		Session session = DBManager.getSessionFactory().openSession();
+		UserDto entity = null;
+		try {
+			String hql = "SELECT obj FROM " + UserDto.class.getSimpleName() + " obj WHERE email = '" + email + "'";
+			Query<UserDto> query = session.createQuery(hql);
+			List results = query.list(); 
+			logger.info("findByEmail - DEBUG - results.size(): " + results.size());
+			if(results.size() > 0) {
+				entity = (UserDto) results.get(0);
+			} else {
+				entity = null;
+			}
+			logger.info("findByEmail - DEBUG - entity: " + entity);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = null;
+			logger.error("Error: " + e, e);
+		} finally {
+			try {
+				session.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.error("Error: " + e, e);
+			}
+		}
+		return entity;
+	}
 
 }

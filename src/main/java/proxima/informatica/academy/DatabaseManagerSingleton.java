@@ -252,35 +252,35 @@ public class DatabaseManagerSingleton {
 		return roleToReturn;
 	}
 
-	public UserDto selectByEmail(String email) {
-		UserDto userToReturn = null;
-		try {
-			Connection con = getConnection();
-			String query = "SELECT * FROM users where email =?;";
-			PreparedStatement pStatement = con.prepareStatement(query);
-			pStatement.setString(1, email);
-			ResultSet res = pStatement.executeQuery();
-			if (res.next() == true) {
-				userToReturn = new UserDto();
-				userToReturn.setId(res.getInt("id"));
-				userToReturn.setEmail(res.getString("email"));
-				userToReturn.setPassword(res.getString("password"));
-				userToReturn.setFirstname(res.getString("firstname"));
-				userToReturn.setLastname(res.getString("lastname"));
-//				userToReturn.setDateOfBirth(res.getDate("dateofbirth"));
-				userToReturn.setRegdate(res.getTimestamp("regdate"));
-				userToReturn.setRole(res.getInt("role"));
-				userToReturn.setImgpath(res.getString("imgpath"));
-				userToReturn.setNote(res.getString("note"));
-				userToReturn.setEnabled(res.getBoolean("enabled"));
-				con.close();
-				return userToReturn;
-			}
-		} catch (Exception e) {
-			logger.error(e.getMessage(),e);
-		}
-		return userToReturn;
-	}
+//	public UserDto selectByEmail(String email) {
+//		UserDto userToReturn = null;
+//		try {
+//			Connection con = getConnection();
+//			String query = "SELECT * FROM users where email =?;";
+//			PreparedStatement pStatement = con.prepareStatement(query);
+//			pStatement.setString(1, email);
+//			ResultSet res = pStatement.executeQuery();
+//			if (res.next() == true) {
+//				userToReturn = new UserDto();
+//				userToReturn.setId(res.getInt("id"));
+//				userToReturn.setEmail(res.getString("email"));
+//				userToReturn.setPassword(res.getString("password"));
+//				userToReturn.setFirstname(res.getString("firstname"));
+//				userToReturn.setLastname(res.getString("lastname"));
+////				userToReturn.setDateOfBirth(res.getDate("dateofbirth"));
+//				userToReturn.setRegdate(res.getTimestamp("regdate"));
+//				userToReturn.setRole(res.getInt("role"));
+//				userToReturn.setImgpath(res.getString("imgpath"));
+//				userToReturn.setNote(res.getString("note"));
+//				userToReturn.setEnabled(res.getBoolean("enabled"));
+//				con.close();
+//				return userToReturn;
+//			}
+//		} catch (Exception e) {
+//			logger.error(e.getMessage(),e);
+//		}
+//		return userToReturn;
+//	}
 
 	public UserDto getUser(String emailLog, String passwordLog) {
 		UserDto userToReturn = new UserDto();

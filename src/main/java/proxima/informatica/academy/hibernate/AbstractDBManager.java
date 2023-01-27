@@ -68,7 +68,7 @@ public class AbstractDBManager {
 		try {
 			Session session = DBManager.getSessionFactory().openSession();
 			session.beginTransaction();
-			itemToReturn = session.get(entityClass, id);
+			itemToReturn = (AbstractCommonDto)session.get(entityClass, id);
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
@@ -95,6 +95,24 @@ public class AbstractDBManager {
 		logger.debug("AbstractDBManager.selectAll - END - items.size(): " + list.size());
 		return list;
 	}
+
+    public static boolean delete(AbstractCommonDto toDelete) {
+    	logger.debug("AbstractDBManager.delete - START");
+		boolean returnFalse = false ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+			session.delete(toDelete);
+			session.getTransaction().commit();
+			session.close();	
+			returnFalse = true ;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			returnFalse = false ;
+		}
+		logger.debug("AbstractDBManager.delete - END");   
+		return returnFalse ;
+    }
 
     public static void deleteById (int id, Class entityClass) {
     	logger.debug("AbstractDBManager.deleteById - START id: " + id);

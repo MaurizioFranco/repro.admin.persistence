@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.AbstractCommonDto;
-import proxima.informatica.academy.dto.SurveyDto;
 
 /**
  * @author maurizio.franco@ymail.com
@@ -28,7 +27,7 @@ public class AbstractDBManager {
 		try {
 			Session session = DBManager.getSessionFactory().openSession();
 			session.beginTransaction();
-			Query<SurveyDto> query = session.createQuery("delete from " + entityClass.getSimpleName());
+			Query<AbstractCommonDto> query = session.createQuery("delete from " + entityClass.getSimpleName());
 			query.executeUpdate();
 			session.getTransaction().commit();
 			session.close();	

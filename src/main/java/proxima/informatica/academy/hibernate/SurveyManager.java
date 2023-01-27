@@ -24,7 +24,6 @@ public class SurveyManager extends AbstractDBManager {
 	private final static Logger logger = LoggerFactory.getLogger(SurveyManager.class);
 	
 	
-	
 	public static void delete (SurveyDto survey) {
 		
 		logger.debug("SurveyManager.insert - START - survey: " + survey);

@@ -3,16 +3,12 @@
  */
 package proxima.informatica.academy.hibernate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.AbstractCommonDto;
-import proxima.informatica.academy.dto.CandidatesDto;
 import proxima.informatica.academy.dto.SurveyDto;
 
 /**
@@ -79,23 +75,6 @@ public class AbstractDBManager {
 		}
 		logger.debug("AbstractDBManager.selectById -END itemToReturn: " + itemToReturn);
 		return itemToReturn;
-	}
-    
-    public static List<AbstractCommonDto> selectAll (Class entityClass) {
-		logger.debug("AbstractDBManager.selectAll - START");
-		List<AbstractCommonDto> list = new ArrayList<AbstractCommonDto> () ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-			Query<AbstractCommonDto> query = session.createQuery("SELECT qst FROM " + entityClass.getSimpleName() + " qst");
-			list = query.getResultList();
-			session.getTransaction().commit();
-			session.close();			
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("AbstractDBManager.selectAll - END - items.size(): " + list.size());
-		return list;
 	}
 
 }

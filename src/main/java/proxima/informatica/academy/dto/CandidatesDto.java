@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "candidates")
-public class CandidatesDto extends AbstractCommonDto {
+public class CandidatesDto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

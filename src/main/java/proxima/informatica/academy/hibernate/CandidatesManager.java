@@ -11,9 +11,7 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import proxima.informatica.academy.dto.AbstractCommonDto;
 import proxima.informatica.academy.dto.CandidatesDto;
-import proxima.informatica.academy.dto.SurveyDto;
 
 /**
  * 
@@ -22,7 +20,7 @@ import proxima.informatica.academy.dto.SurveyDto;
  * @author AntoIannaccone
  *
  */
-public class CandidatesManager extends AbstractDBManager {
+public class CandidatesManager {
 	
 	private final static Logger logger = LoggerFactory.getLogger(CandidatesManager.class);
 	
@@ -57,16 +55,56 @@ public class CandidatesManager extends AbstractDBManager {
 		logger.debug("CandidatesManager.delete - END");        
 	}
 	
-	public static List<AbstractCommonDto> selectAll (Class CandidatesDto) {
-		
-		return selectAll(CandidatesDto.class);
+	public static CandidatesDto selectById (int id) {
+		logger.debug("CandidatesManager.selectById - START - id: " + id);
+		CandidatesDto item = null ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+            item = session.get(CandidatesDto.class, id);
+			session.getTransaction().commit();
+			session.close();			
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		logger.debug("CandidatesManager.selectById - END - item: " + item);
+		return item ;
 	}
 	
 	public static boolean deleteAll () {
-		return deleteAll(CandidatesDto.class);		
+		logger.debug("CandidatesManager.deleteAll - START");
+		boolean returnFalse = false ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+		    Query<CandidatesDto> query = session.createQuery("delete from " + CandidatesDto.class.getSimpleName());
+		    query.executeUpdate();
+			session.getTransaction().commit();
+			session.close();	
+			returnFalse = true ;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			returnFalse = false ;
+		}
+		logger.debug("CandidatesManager.deleteAll - END");   
+		return returnFalse ;
 	}
-    
-    public static CandidatesDto selectById (int id) {
-    	return (CandidatesDto)selectById (id, CandidatesDto.class);
-    }
+	
+	public static List<CandidatesDto> selectAll () {
+		logger.debug("CandidatesManager.selectAll - START");
+		List<CandidatesDto> list = new ArrayList<CandidatesDto> () ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+			Query<CandidatesDto> query = session.createQuery("SELECT qst FROM " + CandidatesDto.class.getSimpleName() + " qst");
+			list = query.getResultList();
+			session.getTransaction().commit();
+			session.close();			
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		logger.debug("CandidatesManager.selectAll - END - items.size(): " + list.size());
+		return list ;
+	}
+
 }

@@ -26,7 +26,7 @@ public class UserDBManagerTest {
 	private final static Logger logger = LoggerFactory.getLogger(UserDBManagerTest.class);
 	
 	@Test
-	public void test2() {
+	public void testInsertOK() {
 		System.out.println("#########");
 		System.out.println("TEST INSERT");
 		System.out.println("#########");
@@ -40,15 +40,12 @@ public class UserDBManagerTest {
     	user.setDateofbirth(Date.valueOf(LocalDate.now()));
     	user.setRegdate(Timestamp.valueOf(LocalDateTime.now()));
     	user.setRole(10);
-    	
     	Session session = DBManager.getSessionFactory().openSession();
         session.beginTransaction();
         Object generatedIdentifier = session.save(user);
-//        logger.debug("insertNewUser - DEBUG - generatedIdentifier" + ((Integer)generatedIdentifier).intValue());
         int id_inserted_value = ((Integer)generatedIdentifier).intValue();
         session.getTransaction().commit();
         session.close();
-    	
 		logger.debug("@Test --> inserted: " + id_inserted_value);
         assertTrue( id_inserted_value>0 );
 	}

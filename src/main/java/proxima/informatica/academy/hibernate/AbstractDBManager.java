@@ -96,6 +96,26 @@ public class AbstractDBManager {
 		return list;
 	}
 
+    public static AbstractCommonDto update (AbstractCommonDto itemToUpdate) {
+    	
+    	logger.debug("AbstractDBManager.update - START - itemToUpdate: " + itemToUpdate);
+    	AbstractCommonDto updatedItem = null ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+			updatedItem = session.merge(itemToUpdate);
+			session.getTransaction().commit();
+			session.close();
+		} catch (Exception e) {	
+			logger.error("AbstractDBManager.update - EXCEPTION!!!!!!!");
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+		}
+		logger.debug("AbstractDBManager.update - END - updatedItem: " + updatedItem);
+		return updatedItem ;
+    	
+    }
+
     public static boolean delete(AbstractCommonDto toDelete) {
     	logger.debug("AbstractDBManager.delete - START");
 		boolean returnFalse = false ;

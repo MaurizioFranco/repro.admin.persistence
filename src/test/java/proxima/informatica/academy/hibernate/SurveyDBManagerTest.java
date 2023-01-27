@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
-import proxima.informatica.academy.dto.RoleDto;
+import proxima.informatica.academy.dto.AbstractCommonDto;
 import proxima.informatica.academy.dto.SurveyDto;
 
 /**
@@ -22,9 +20,9 @@ public class SurveyDBManagerTest {
 	@Test
 	public void testInsertOk() {
 
-		System.out.println("#########");
-		System.out.println("TEST INSERT");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST INSERT");
+		logger.debug("#########");
 		SurveyDto survey = new SurveyDto();
 		survey.setLabel("testLabel");
 		survey.setTime(1l);
@@ -33,51 +31,51 @@ public class SurveyDBManagerTest {
 		int id_inserted_value = SurveyManager.insert(survey);
 		logger.debug("@Test --> inserted: " + id_inserted_value);
 		assertTrue(id_inserted_value > 0);
-		System.out.println("#########");
-		System.out.println("TEST INSERT");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST INSERT");
+		logger.debug("#########");
 
 	}
 
 	@Test
 	public void testDeleteAll() {
 
-		System.out.println("#########");
-		System.out.println("TEST DELETE ALL - START");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST DELETE ALL - START");
+		logger.debug("#########");
 		boolean returnValue = SurveyManager.deleteAll();
 		logger.debug("@Test --> returnValue: " + returnValue);
 		assertTrue( returnValue );
-		System.out.println("#########");
-		System.out.println("TEST DELETE ALL - END");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST DELETE ALL - END");
+		logger.debug("#########");
 
 	}
 
 	@Test
 	public void testSelectAllEmpty() {
 
-		System.out.println("#########");
-		System.out.println("TEST SELECT ALL EMPTY- START");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECT ALL EMPTY- START");
+		logger.debug("#########");
 		boolean returnValue = SurveyManager.deleteAll();
 		logger.debug("@Test --> returnValue: " + returnValue);
 		assertTrue( returnValue );
 		int selectAllSize = SurveyManager.selectAll().size();
 		logger.debug("@Test --> selectAllSize: " + selectAllSize);
 		assertTrue( selectAllSize==0 );
-		System.out.println("#########");
-		System.out.println("TEST SELECT ALL EMPTY- END");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECT ALL EMPTY- END");
+		logger.debug("#########");
 
 	}
 
 	@Test
 	public void testSelectAllForOne() {
 
-		System.out.println("#########");
-		System.out.println("TEST SELECT ALL FOR ONE - START");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECT ALL FOR ONE - START");
+		logger.debug("#########");
 		boolean returnValue = SurveyManager.deleteAll();
 		logger.debug("@Test --> returnValue: " + returnValue);
 		assertTrue( returnValue );
@@ -94,18 +92,18 @@ public class SurveyDBManagerTest {
 		selectAllSize = SurveyManager.selectAll().size();
 		logger.debug("@Test --> selectAllSize: " + selectAllSize);
 		assertTrue( selectAllSize==1 );
-		System.out.println("#########");
-		System.out.println("TEST SELECT ALL FOR ONE - END");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECT ALL FOR ONE - END");
+		logger.debug("#########");
 
 	}
 
 	@Test
 	public void testDelete() {
 
-		System.out.println("#########");
-		System.out.println("TEST DELETE - START");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST DELETE - START");
+		logger.debug("#########");
 		boolean returnValue = SurveyManager.deleteAll();
 		logger.debug("@Test --> returnValue: " + returnValue);
 		assertTrue( returnValue );
@@ -126,18 +124,18 @@ public class SurveyDBManagerTest {
 		selectAllSize = SurveyManager.selectAll().size();
 		logger.debug("@Test --> selectAllSize: " + selectAllSize);
 		assertTrue( selectAllSize==0 );
-		System.out.println("#########");
-		System.out.println("TEST DELETE - END");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST DELETE - END");
+		logger.debug("#########");
 		
 	}
 	
 	@Test
 	public void testSelectById () {
 		
-		System.out.println("#########");
-		System.out.println("TEST SELECTBYID - START");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECTBYID - START");
+		logger.debug("#########");
 		boolean returnValue = SurveyManager.deleteAll();
 		logger.debug("@Test --> returnValue: " + returnValue);
 		assertTrue( returnValue );
@@ -151,12 +149,56 @@ public class SurveyDBManagerTest {
 		int id_inserted_value = SurveyManager.insert(survey);
 		logger.debug("@Test --> inserted: " + id_inserted_value);
 		assertTrue(id_inserted_value > 0);
-		List<SurveyDto> selectAll = SurveyManager.selectAll();
-		survey = SurveyManager.selectById(selectAll.get(0).getId());
+		survey = SurveyManager.selectAll().get(0);
 		assertTrue( survey != null);
-		System.out.println("#########");
-		System.out.println("TEST SELECTBYID - END");
-		System.out.println("#########");
+		logger.debug("#########");
+		logger.debug("TEST SELECTBYID - END");
+		logger.debug("#########");
+		
+	}
+	
+	@Test
+	public void testUpdate() {
+		
+		logger.debug("#########");
+		logger.debug("TEST UPDATE - START");
+		logger.debug("#########");
+		
+		boolean returnValue = SurveyManager.deleteAll();
+		logger.debug("#########");
+		logger.debug("TEST UPDATE - DEBUG 1 - @Test --> deleteAll: " + returnValue);
+		logger.debug("#########");
+		assertTrue( returnValue );
+		
+		SurveyDto survey = new SurveyDto();
+		survey.setLabel("testLabel");
+		survey.setTime(1l);
+		survey.setDescription("TEST DESCRIPTION");
+		int id_inserted_value = SurveyManager.insert(survey);
+		logger.debug("#########");
+		logger.debug("TEST UPDATE - DEBUG 2 - @Test --> insert: " + id_inserted_value);
+		logger.debug("#########");
+		assertTrue(id_inserted_value > 0);
+		
+		survey = SurveyManager.selectById(id_inserted_value);
+		logger.debug("#########");
+		logger.debug("TEST UPDATE - DEBUG 4 - @Test --> selectById: " + survey);
+		logger.debug("#########");
+		survey.setDescription("NEW DESCRIPTION");
+		logger.debug("#########");
+		logger.debug("TEST UPDATE - DEBUG 5 - @Test --> trying to update: " + survey);
+		logger.debug("#########");
+		AbstractCommonDto updatedItem = SurveyManager.update(survey) ;
+		logger.debug("#########");
+		logger.debug("TEST UPDATE - DEBUG 6 - @Test --> updatedItem: " + updatedItem);
+		logger.debug("#########");
+		assertTrue(SurveyManager.selectAll().size()==1);
+		survey = SurveyManager.selectAll().get(0);
+		assertTrue(survey.getDescription().equals("NEW DESCRIPTION"));
+		
+		logger.debug("#########");
+		logger.debug("TEST UPDATE - END");
+		logger.debug("#########");
 		
 	}
 

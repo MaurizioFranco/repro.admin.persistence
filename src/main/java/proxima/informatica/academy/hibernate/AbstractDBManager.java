@@ -76,5 +76,24 @@ public class AbstractDBManager {
 		logger.debug("AbstractDBManager.selectById -END itemToReturn: " + itemToReturn);
 		return itemToReturn;
 	}
+    
+    public static boolean delete(AbstractCommonDto toDelete) {
+    	logger.debug("AbstractDBManager.deleteObject - START");
+		boolean returnFalse = false ;
+		try {
+			Session session = DBManager.getSessionFactory().openSession();
+			session.beginTransaction();
+			Query query = session.createQuery("delete from " + toDelete.getClass().getSimpleName());
+			query.executeUpdate();
+			session.getTransaction().commit();
+			session.close();	
+			returnFalse = true ;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			returnFalse = false ;
+		}
+		logger.debug("AbstractDBManager.deleteAll - END");   
+		return returnFalse ;
+    }
 
 }

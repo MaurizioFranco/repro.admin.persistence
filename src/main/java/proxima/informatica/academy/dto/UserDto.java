@@ -20,7 +20,6 @@ import jakarta.persistence.Table;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	
 	private Integer id;
 	private String email;
 	private String password;

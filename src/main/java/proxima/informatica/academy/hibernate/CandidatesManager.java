@@ -11,6 +11,7 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import proxima.informatica.academy.dto.AbstractCommonDto;
 import proxima.informatica.academy.dto.CandidatesDto;
 
 /**
@@ -20,7 +21,7 @@ import proxima.informatica.academy.dto.CandidatesDto;
  * @author AntoIannaccone
  *
  */
-public class CandidatesManager {
+public class CandidatesManager extends AbstractDBManager {
 	
 	private final static Logger logger = LoggerFactory.getLogger(CandidatesManager.class);
 	
@@ -90,21 +91,9 @@ public class CandidatesManager {
 		return returnFalse ;
 	}
 	
-	public static List<CandidatesDto> selectAll () {
-		logger.debug("CandidatesManager.selectAll - START");
-		List<CandidatesDto> list = new ArrayList<CandidatesDto> () ;
-		try {
-			Session session = DBManager.getSessionFactory().openSession();
-			session.beginTransaction();
-			Query<CandidatesDto> query = session.createQuery("SELECT qst FROM " + CandidatesDto.class.getSimpleName() + " qst");
-			list = query.getResultList();
-			session.getTransaction().commit();
-			session.close();			
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-		}
-		logger.debug("CandidatesManager.selectAll - END - items.size(): " + list.size());
-		return list ;
+	public static List<AbstractCommonDto> selectAll (Class CandidatesDto) {
+		
+		return selectAll(CandidatesDto.class);
 	}
 
 }

@@ -70,7 +70,14 @@ public class SurveyManager extends AbstractDBManager {
     	return (SurveyDto)selectById (id, SurveyDto.class);
     }
 	
-	
+	public static SurveyDto update (SurveyDto survey) {
+		logger.debug("SurveyManager.update - START - survey: " + survey);
+		AbstractCommonDto returnValue = AbstractDBManager.update(survey);
+		if (returnValue != null) {
+			return (SurveyDto)returnValue;
+		}
+		return null ;
+	}
 	
 	
 	

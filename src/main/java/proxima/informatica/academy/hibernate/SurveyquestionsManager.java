@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.hibernate.sql.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import proxima.informatica.academy.dto.SurveyquestionsDto;
+import proxima.informatica.academy.dto.UserDto;
 
 /**
  * 
@@ -78,6 +80,14 @@ public class SurveyquestionsManager extends AbstractDBManager {
 		}
 		logger.debug("SurveyquestionsManager.selectAll - END - items.size(): " + list.size());
 		return list;
+	}
+	
+	public static boolean update(SurveyquestionsDto survequestionToUpdate) {
+		boolean result = false;
+		SurveyquestionsDto updateSq = (SurveyquestionsDto) AbstractDBManager.update(survequestionToUpdate);
+		if (updateSq != null)
+			result = true;
+		return result;
 	}
 
 }

@@ -134,8 +134,9 @@ public class AbstractDBManager {
 		return returnFalse ;
     }
 
-    public static void deleteById (int id, Class entityClass) {
+    public static boolean deleteById (int id, Class entityClass) {
     	logger.debug("AbstractDBManager.deleteById - START id: " + id);
+    	boolean result = false;
     	AbstractCommonDto item = selectById(id, entityClass);
     	try {
 			Session session = DBManager.getSessionFactory().openSession();
@@ -143,10 +144,13 @@ public class AbstractDBManager {
 			session.delete(item);
 			session.getTransaction().commit();
 			session.close();	
+			if(selectById(id, entityClass) == null)
+				result = true;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
     	logger.debug("AbstractDBManager.deleteById - END");
+    	return result;
     }
     	
 }

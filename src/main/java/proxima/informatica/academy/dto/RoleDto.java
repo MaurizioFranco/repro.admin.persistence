@@ -1,14 +1,24 @@
 package proxima.informatica.academy.dto;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  * @author Giammarco Lucchetti
  */
+@Entity
+@Table(name = "roles")
 public class RoleDto extends AbstractCommonDto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String label;
 	private String description;
 	private Integer level;
-	
+
 	public RoleDto(Integer id, String label, String description, Integer level) {
 		super();
 		this.id = id;
@@ -82,7 +92,5 @@ public class RoleDto extends AbstractCommonDto {
 	public String toString() {
 		return "RoleDto [id=" + id + ", label=" + label + ", description=" + description + ", level=" + level + "]";
 	}
-	
-	
-	
+
 }
